@@ -35,7 +35,7 @@ namespace FlashCard.View
 
         Word currentWord = new Word();
         int currentIndexWord = 0;
-
+        int side = 0;//0 is front,1 is back,2 is both of them
 
         public NhomTu()
         {
@@ -159,6 +159,11 @@ namespace FlashCard.View
                 HienThe(lstCurrentWords[0]);
             }
             catch { }
+            finally
+            {
+                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+                numIndexWord.Minimum = 0;
+            }
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -171,7 +176,7 @@ namespace FlashCard.View
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnNext_Click(object sender, EventArgs e)
         {
             btnPre.Enabled = true;
             currentIndexWord++;
@@ -194,6 +199,99 @@ namespace FlashCard.View
             currentIndexWord--;
             currentWord = lstCurrentWords[currentIndexWord];
             HienThe(lstCurrentWords[currentIndexWord]);
+        }
+
+        private void rb1_CheckedChanged(object sender, EventArgs e)
+        {
+            currentWord.Step = 1;
+        }
+
+        private void rb2_CheckedChanged(object sender, EventArgs e)
+        {
+            currentWord.Step = 2;
+        }
+
+        private void rb4_CheckedChanged(object sender, EventArgs e)
+        {
+            currentWord.Step = 4;
+        }
+
+        private void rb5_CheckedChanged(object sender, EventArgs e)
+        {
+            currentWord.Step = 5;
+        }
+
+        private void rb7_CheckedChanged(object sender, EventArgs e)
+        {
+            currentWord.Step = 7;
+        }
+
+        private void rb10_CheckedChanged(object sender, EventArgs e)
+        {
+            currentWord.Step = 10;
+        }
+
+        private void rb15_CheckedChanged(object sender, EventArgs e)
+        {
+            currentWord.Step = 15;
+        }
+
+        private void rb30_CheckedChanged(object sender, EventArgs e)
+        {
+            currentWord.Step = 15;
+        }
+
+        private void btnFlip_Click(object sender, EventArgs e)
+        {
+            if (side == 1)
+            {
+                pnFront.Visible = false;
+                pnBack.Visible = true;
+                side = 0;
+            }
+            else if (side == 0)
+            {
+                pnFront.Visible = true;
+                pnBack.Visible = false;
+                side = 1;
+            }
+
+        }
+
+        private void lbPathOfSpeech_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbExample_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbMean_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbTagName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numIndexWord_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                currentIndexWord = Convert.ToInt32(numIndexWord.Value);
+                currentWord = lstCurrentWords[currentIndexWord];
+                HienThe(lstCurrentWords[currentIndexWord]);
+            }
+            catch
+            {
+
+            }
+
+
         }
     }
 }
