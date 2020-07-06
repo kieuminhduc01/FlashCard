@@ -182,6 +182,7 @@ namespace FlashCard.View
             currentIndexWord++;
             currentWord = lstCurrentWords[currentIndexWord];
             HienThe(lstCurrentWords[currentIndexWord]);
+            numDaysRecall.Value = currentWord.Step;
         }
 
         private void btnForget_Click(object sender, EventArgs e)
@@ -199,46 +200,8 @@ namespace FlashCard.View
             currentIndexWord--;
             currentWord = lstCurrentWords[currentIndexWord];
             HienThe(lstCurrentWords[currentIndexWord]);
-        }
+            numDaysRecall.Value = currentWord.Step;
 
-        private void rb1_CheckedChanged(object sender, EventArgs e)
-        {
-            currentWord.Step = 1;
-        }
-
-        private void rb2_CheckedChanged(object sender, EventArgs e)
-        {
-            currentWord.Step = 2;
-        }
-
-        private void rb4_CheckedChanged(object sender, EventArgs e)
-        {
-            currentWord.Step = 4;
-        }
-
-        private void rb5_CheckedChanged(object sender, EventArgs e)
-        {
-            currentWord.Step = 5;
-        }
-
-        private void rb7_CheckedChanged(object sender, EventArgs e)
-        {
-            currentWord.Step = 7;
-        }
-
-        private void rb10_CheckedChanged(object sender, EventArgs e)
-        {
-            currentWord.Step = 10;
-        }
-
-        private void rb15_CheckedChanged(object sender, EventArgs e)
-        {
-            currentWord.Step = 15;
-        }
-
-        private void rb30_CheckedChanged(object sender, EventArgs e)
-        {
-            currentWord.Step = 15;
         }
 
         private void btnFlip_Click(object sender, EventArgs e)
@@ -285,6 +248,7 @@ namespace FlashCard.View
                 currentIndexWord = Convert.ToInt32(numIndexWord.Value);
                 currentWord = lstCurrentWords[currentIndexWord];
                 HienThe(lstCurrentWords[currentIndexWord]);
+                numDaysRecall.Value = currentWord.Step;
             }
             catch
             {
