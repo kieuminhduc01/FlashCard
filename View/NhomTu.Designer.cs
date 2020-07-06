@@ -219,7 +219,7 @@
             this.numDaysRecall.Name = "numDaysRecall";
             this.numDaysRecall.Size = new System.Drawing.Size(123, 22);
             this.numDaysRecall.TabIndex = 9;
-            this.numDaysRecall.ValueChanged += new System.EventHandler(this.numIndexWord_ValueChanged);
+            this.numDaysRecall.ValueChanged += new System.EventHandler(this.numDaysRecall_ValueChanged);
             // 
             // label2
             // 

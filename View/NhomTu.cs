@@ -257,6 +257,19 @@ namespace FlashCard.View
 
 
         }
+
+        private void numDaysRecall_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                currentWord.Step = Convert.ToInt32(numDaysRecall.Value);
+            }
+            catch
+            {
+
+            }
+
+        }
     }
 }
 
