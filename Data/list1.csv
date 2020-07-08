@@ -1,4 +1,7 @@
 tagName,mean,StartTime,Step,ATTT,IPA,pathOfSpeech,Ex
-mean1,nghia,2020/7/4,1,min,n,n,Ex1
-mean2,nghia,2020/7/4,1,min,n,n,Ex2
-mean3,nghia,2020/7/4,1,min,n,n,Ex3
+mean1-1,nghia,7/4/2020,1,min,n,n,Ex1
+mean2-1,nghia,7/4/2020,1,min,n,n,Ex2
+mean3-1,nghia,7/4/2020,1,min,n,n,Ex3
+mean1-2,nghia,7/4/2020,3,min,n,n,Ex1
+mean2-2,nghia,7/4/2020,4,min,n,n,Ex2
+mean3-2,nghia,7/4/2020,5,min,n,n,Ex3
