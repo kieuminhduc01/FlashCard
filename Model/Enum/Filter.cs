@@ -5,13 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FlashCard.Model.Enum
-{/// <summary>
-/// 
-/// </summary>
-    public enum Status
+{
+    enum Filter
     {
-        remember,
-        forget,
-        willRecall
+        AllList,
+        ByDay
     }
 }

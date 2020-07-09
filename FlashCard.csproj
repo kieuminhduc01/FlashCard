@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Enum\Filter.cs" />
     <Compile Include="Model\Enum\PathOfSpeech.cs" />
     <Compile Include="Model\Enum\Status.cs" />
     <Compile Include="Model\ListGroup.cs" />

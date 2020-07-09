@@ -20,9 +20,14 @@ namespace FlashCard.View
         }
         public void EventForButtonGroup(object sender, EventArgs e)
         {
+
+
+
+
             Button btn = sender as Button;
-            NhomTu nhomTu = new NhomTu();
+            NhomTu nhomTu = new NhomTu() { TopLevel = false, TopMost = true }; ;
             nhomTu.Text = btn.Text;
+            this.pnMain.Controls.Add(nhomTu);
             nhomTu.Show();
         }
         private void button1_Click(object sender, EventArgs e)
@@ -41,12 +46,18 @@ namespace FlashCard.View
             {
                 Button btnNewGroup = new Button();
                 btnNewGroup.Size = new Size(280, 60);
-                btnNewGroup.Text = Path.GetFileName(s).Replace(".csv","");
+                btnNewGroup.Text = Path.GetFileName(s).Replace(".csv", "");
                 btnNewGroup.BackColor = Color.White;
                 btnNewGroup.Font = new Font("Arial", 15, FontStyle.Bold);
                 btnNewGroup.TextAlign = ContentAlignment.MiddleLeft;
                 btnNewGroup.Click += new EventHandler(this.EventForButtonGroup);
 
+
+                if (File.ReadAllLines(s).Length == 1)
+                {
+                    btnNewGroup.BackColor = Color.Red;
+                    btnNewGroup.Enabled = false;
+                }
                 this.pnShow.Controls.Add(btnNewGroup);
             }
         }

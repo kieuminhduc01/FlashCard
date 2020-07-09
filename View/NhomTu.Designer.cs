@@ -28,234 +28,94 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pnBack = new System.Windows.Forms.Panel();
             this.lbMean = new System.Windows.Forms.Label();
-            this.lbIPA = new System.Windows.Forms.Label();
-            this.lbExample = new System.Windows.Forms.Label();
             this.lbPathOfSpeech = new System.Windows.Forms.Label();
-            this.lbTagName = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rb30 = new System.Windows.Forms.RadioButton();
-            this.rb15 = new System.Windows.Forms.RadioButton();
-            this.rb10 = new System.Windows.Forms.RadioButton();
-            this.rb7 = new System.Windows.Forms.RadioButton();
-            this.rb5 = new System.Windows.Forms.RadioButton();
-            this.rb4 = new System.Windows.Forms.RadioButton();
-            this.rb2 = new System.Windows.Forms.RadioButton();
-            this.rb1 = new System.Windows.Forms.RadioButton();
-            this.btnPre = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.lbIPA = new System.Windows.Forms.Label();
             this.btnForget = new System.Windows.Forms.Button();
             this.btnRemembed = new System.Windows.Forms.Button();
+            this.pnFront = new System.Windows.Forms.Panel();
+            this.lbTagName = new System.Windows.Forms.Label();
+            this.lbExample = new System.Windows.Forms.Label();
             this.btnFlip = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPre = new System.Windows.Forms.Button();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.panel1.SuspendLayout();
+            this.numIndexWord = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numDaysRecall = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnTuChuaThuoc = new System.Windows.Forms.Button();
+            this.btnListTuDaThuoc = new System.Windows.Forms.Button();
+            this.btnAllTu = new System.Windows.Forms.Button();
+            this.cbCaiDatHienThi = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pnFlashCard = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.pnBack.SuspendLayout();
+            this.pnFront.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numIndexWord)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDaysRecall)).BeginInit();
+            this.pnFlashCard.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.hScrollBar1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 528);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1342, 116);
-            this.panel1.TabIndex = 0;
-            // 
-            // hScrollBar1
-            // 
-            this.hScrollBar1.Location = new System.Drawing.Point(12, 12);
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(661, 22);
-            this.hScrollBar1.TabIndex = 0;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.lbMean);
-            this.panel2.Controls.Add(this.lbIPA);
-            this.panel2.Controls.Add(this.lbExample);
-            this.panel2.Controls.Add(this.lbPathOfSpeech);
-            this.panel2.Controls.Add(this.lbTagName);
-            this.panel2.Location = new System.Drawing.Point(180, 12);
+            this.panel2.Controls.Add(this.pnBack);
+            this.panel2.Controls.Add(this.btnForget);
+            this.panel2.Controls.Add(this.btnRemembed);
+            this.panel2.Controls.Add(this.pnFront);
+            this.panel2.Location = new System.Drawing.Point(8, 74);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(493, 461);
+            this.panel2.Size = new System.Drawing.Size(503, 471);
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // pnBack
+            // 
+            this.pnBack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnBack.Controls.Add(this.lbMean);
+            this.pnBack.Controls.Add(this.lbPathOfSpeech);
+            this.pnBack.Controls.Add(this.lbIPA);
+            this.pnBack.Location = new System.Drawing.Point(11, 254);
+            this.pnBack.Name = "pnBack";
+            this.pnBack.Size = new System.Drawing.Size(479, 200);
+            this.pnBack.TabIndex = 4;
+            // 
             // lbMean
             // 
-            this.lbMean.Location = new System.Drawing.Point(82, 218);
+            this.lbMean.Location = new System.Drawing.Point(124, 111);
             this.lbMean.Name = "lbMean";
-            this.lbMean.Size = new System.Drawing.Size(93, 20);
+            this.lbMean.Size = new System.Drawing.Size(240, 32);
             this.lbMean.TabIndex = 2;
             this.lbMean.Text = "Mean";
-            // 
-            // lbIPA
-            // 
-            this.lbIPA.Location = new System.Drawing.Point(82, 169);
-            this.lbIPA.Name = "lbIPA";
-            this.lbIPA.Size = new System.Drawing.Size(93, 20);
-            this.lbIPA.TabIndex = 1;
-            this.lbIPA.Text = "IPA";
-            this.lbIPA.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // lbExample
-            // 
-            this.lbExample.Location = new System.Drawing.Point(22, 336);
-            this.lbExample.Name = "lbExample";
-            this.lbExample.Size = new System.Drawing.Size(454, 107);
-            this.lbExample.TabIndex = 1;
-            this.lbExample.Text = "Example";
+            this.lbMean.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbMean.Click += new System.EventHandler(this.lbMean_Click);
             // 
             // lbPathOfSpeech
             // 
-            this.lbPathOfSpeech.Location = new System.Drawing.Point(82, 120);
+            this.lbPathOfSpeech.Location = new System.Drawing.Point(124, 13);
             this.lbPathOfSpeech.Name = "lbPathOfSpeech";
-            this.lbPathOfSpeech.Size = new System.Drawing.Size(113, 26);
+            this.lbPathOfSpeech.Size = new System.Drawing.Size(240, 32);
             this.lbPathOfSpeech.TabIndex = 0;
             this.lbPathOfSpeech.Text = "PathOfSpeech";
+            this.lbPathOfSpeech.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPathOfSpeech.Click += new System.EventHandler(this.lbPathOfSpeech_Click);
             // 
-            // lbTagName
+            // lbIPA
             // 
-            this.lbTagName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTagName.Location = new System.Drawing.Point(85, 67);
-            this.lbTagName.Name = "lbTagName";
-            this.lbTagName.Size = new System.Drawing.Size(342, 34);
-            this.lbTagName.TabIndex = 0;
-            this.lbTagName.Text = "TagName";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rb30);
-            this.groupBox1.Controls.Add(this.rb15);
-            this.groupBox1.Controls.Add(this.rb10);
-            this.groupBox1.Controls.Add(this.rb7);
-            this.groupBox1.Controls.Add(this.rb5);
-            this.groupBox1.Controls.Add(this.rb4);
-            this.groupBox1.Controls.Add(this.rb2);
-            this.groupBox1.Controls.Add(this.rb1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(135, 516);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Lịch Ôn";
-            // 
-            // rb30
-            // 
-            this.rb30.AutoSize = true;
-            this.rb30.Location = new System.Drawing.Point(24, 446);
-            this.rb30.Name = "rb30";
-            this.rb30.Size = new System.Drawing.Size(79, 21);
-            this.rb30.TabIndex = 7;
-            this.rb30.TabStop = true;
-            this.rb30.Text = "30 days";
-            this.rb30.UseVisualStyleBackColor = true;
-            // 
-            // rb15
-            // 
-            this.rb15.AutoSize = true;
-            this.rb15.Location = new System.Drawing.Point(24, 393);
-            this.rb15.Name = "rb15";
-            this.rb15.Size = new System.Drawing.Size(79, 21);
-            this.rb15.TabIndex = 6;
-            this.rb15.TabStop = true;
-            this.rb15.Text = "15 days";
-            this.rb15.UseVisualStyleBackColor = true;
-            // 
-            // rb10
-            // 
-            this.rb10.AutoSize = true;
-            this.rb10.Location = new System.Drawing.Point(24, 340);
-            this.rb10.Name = "rb10";
-            this.rb10.Size = new System.Drawing.Size(79, 21);
-            this.rb10.TabIndex = 5;
-            this.rb10.TabStop = true;
-            this.rb10.Text = "10 days";
-            this.rb10.UseVisualStyleBackColor = true;
-            // 
-            // rb7
-            // 
-            this.rb7.AutoSize = true;
-            this.rb7.Location = new System.Drawing.Point(24, 287);
-            this.rb7.Name = "rb7";
-            this.rb7.Size = new System.Drawing.Size(71, 21);
-            this.rb7.TabIndex = 4;
-            this.rb7.TabStop = true;
-            this.rb7.Text = "7 days";
-            this.rb7.UseVisualStyleBackColor = true;
-            // 
-            // rb5
-            // 
-            this.rb5.AutoSize = true;
-            this.rb5.Location = new System.Drawing.Point(24, 234);
-            this.rb5.Name = "rb5";
-            this.rb5.Size = new System.Drawing.Size(71, 21);
-            this.rb5.TabIndex = 3;
-            this.rb5.TabStop = true;
-            this.rb5.Text = "5 days";
-            this.rb5.UseVisualStyleBackColor = true;
-            // 
-            // rb4
-            // 
-            this.rb4.AutoSize = true;
-            this.rb4.Location = new System.Drawing.Point(24, 181);
-            this.rb4.Name = "rb4";
-            this.rb4.Size = new System.Drawing.Size(71, 21);
-            this.rb4.TabIndex = 2;
-            this.rb4.TabStop = true;
-            this.rb4.Text = "4 days";
-            this.rb4.UseVisualStyleBackColor = true;
-            // 
-            // rb2
-            // 
-            this.rb2.AutoSize = true;
-            this.rb2.Location = new System.Drawing.Point(24, 128);
-            this.rb2.Name = "rb2";
-            this.rb2.Size = new System.Drawing.Size(71, 21);
-            this.rb2.TabIndex = 1;
-            this.rb2.TabStop = true;
-            this.rb2.Text = "2 days";
-            this.rb2.UseVisualStyleBackColor = true;
-            // 
-            // rb1
-            // 
-            this.rb1.AutoSize = true;
-            this.rb1.Location = new System.Drawing.Point(24, 75);
-            this.rb1.Name = "rb1";
-            this.rb1.Size = new System.Drawing.Size(71, 21);
-            this.rb1.TabIndex = 0;
-            this.rb1.TabStop = true;
-            this.rb1.Text = "1 days";
-            this.rb1.UseVisualStyleBackColor = true;
-            // 
-            // btnPre
-            // 
-            this.btnPre.Location = new System.Drawing.Point(180, 479);
-            this.btnPre.Name = "btnPre";
-            this.btnPre.Size = new System.Drawing.Size(75, 23);
-            this.btnPre.TabIndex = 3;
-            this.btnPre.Text = "<<";
-            this.btnPre.UseVisualStyleBackColor = true;
-            this.btnPre.Click += new System.EventHandler(this.btnPre_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(598, 479);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 4;
-            this.btnNext.Text = ">>";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.button2_Click);
+            this.lbIPA.Location = new System.Drawing.Point(124, 62);
+            this.lbIPA.Name = "lbIPA";
+            this.lbIPA.Size = new System.Drawing.Size(240, 32);
+            this.lbIPA.TabIndex = 1;
+            this.lbIPA.Text = "IPA";
+            this.lbIPA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbIPA.Click += new System.EventHandler(this.label3_Click);
             // 
             // btnForget
             // 
-            this.btnForget.Location = new System.Drawing.Point(270, 479);
+            this.btnForget.Location = new System.Drawing.Point(11, 6);
             this.btnForget.Name = "btnForget";
             this.btnForget.Size = new System.Drawing.Size(105, 23);
             this.btnForget.TabIndex = 5;
@@ -265,7 +125,7 @@
             // 
             // btnRemembed
             // 
-            this.btnRemembed.Location = new System.Drawing.Point(487, 479);
+            this.btnRemembed.Location = new System.Drawing.Point(385, 6);
             this.btnRemembed.Name = "btnRemembed";
             this.btnRemembed.Size = new System.Drawing.Size(105, 23);
             this.btnRemembed.TabIndex = 5;
@@ -273,66 +133,208 @@
             this.btnRemembed.UseVisualStyleBackColor = true;
             this.btnRemembed.Click += new System.EventHandler(this.btnRemembed_Click);
             // 
+            // pnFront
+            // 
+            this.pnFront.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnFront.Controls.Add(this.lbTagName);
+            this.pnFront.Controls.Add(this.lbExample);
+            this.pnFront.Location = new System.Drawing.Point(11, 35);
+            this.pnFront.Name = "pnFront";
+            this.pnFront.Size = new System.Drawing.Size(479, 200);
+            this.pnFront.TabIndex = 3;
+            // 
+            // lbTagName
+            // 
+            this.lbTagName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTagName.Location = new System.Drawing.Point(67, 18);
+            this.lbTagName.Name = "lbTagName";
+            this.lbTagName.Size = new System.Drawing.Size(342, 34);
+            this.lbTagName.TabIndex = 0;
+            this.lbTagName.Text = "TagName";
+            this.lbTagName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbTagName.Click += new System.EventHandler(this.lbTagName_Click);
+            // 
+            // lbExample
+            // 
+            this.lbExample.Location = new System.Drawing.Point(28, 52);
+            this.lbExample.Name = "lbExample";
+            this.lbExample.Size = new System.Drawing.Size(428, 133);
+            this.lbExample.TabIndex = 1;
+            this.lbExample.Text = "Example";
+            this.lbExample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbExample.Click += new System.EventHandler(this.lbExample_Click);
+            // 
             // btnFlip
             // 
-            this.btnFlip.Location = new System.Drawing.Point(381, 479);
+            this.btnFlip.Location = new System.Drawing.Point(212, 551);
             this.btnFlip.Name = "btnFlip";
             this.btnFlip.Size = new System.Drawing.Size(105, 23);
             this.btnFlip.TabIndex = 6;
             this.btnFlip.Text = "Quay";
             this.btnFlip.UseVisualStyleBackColor = true;
+            this.btnFlip.Click += new System.EventHandler(this.btnFlip_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(436, 551);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 4;
+            this.btnNext.Text = ">>";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPre
+            // 
+            this.btnPre.Location = new System.Drawing.Point(8, 551);
+            this.btnPre.Name = "btnPre";
+            this.btnPre.Size = new System.Drawing.Size(75, 23);
+            this.btnPre.TabIndex = 3;
+            this.btnPre.Text = "<<";
+            this.btnPre.UseVisualStyleBackColor = true;
+            this.btnPre.Click += new System.EventHandler(this.btnPre_Click);
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(1090, 12);
+            this.monthCalendar1.Location = new System.Drawing.Point(18, 34);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 7;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
+            // numIndexWord
+            // 
+            this.numIndexWord.Location = new System.Drawing.Point(157, 483);
+            this.numIndexWord.Name = "numIndexWord";
+            this.numIndexWord.Size = new System.Drawing.Size(123, 22);
+            this.numIndexWord.TabIndex = 9;
+            this.numIndexWord.ValueChanged += new System.EventHandler(this.numIndexWord_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 488);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 17);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Từ số";
+            // 
+            // numDaysRecall
+            // 
+            this.numDaysRecall.Location = new System.Drawing.Point(157, 526);
+            this.numDaysRecall.Name = "numDaysRecall";
+            this.numDaysRecall.Size = new System.Drawing.Size(123, 22);
+            this.numDaysRecall.TabIndex = 9;
+            this.numDaysRecall.ValueChanged += new System.EventHandler(this.numDaysRecall_ValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 528);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 17);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Số ngày ôn lại";
+            // 
+            // btnTuChuaThuoc
+            // 
+            this.btnTuChuaThuoc.Location = new System.Drawing.Point(352, 10);
+            this.btnTuChuaThuoc.Name = "btnTuChuaThuoc";
+            this.btnTuChuaThuoc.Size = new System.Drawing.Size(146, 30);
+            this.btnTuChuaThuoc.TabIndex = 11;
+            this.btnTuChuaThuoc.Text = "List Tu Chua Thuoc";
+            this.btnTuChuaThuoc.UseVisualStyleBackColor = true;
+            this.btnTuChuaThuoc.Click += new System.EventHandler(this.btnTuChuaThuoc_Click);
+            // 
+            // btnListTuDaThuoc
+            // 
+            this.btnListTuDaThuoc.Location = new System.Drawing.Point(19, 3);
+            this.btnListTuDaThuoc.Name = "btnListTuDaThuoc";
+            this.btnListTuDaThuoc.Size = new System.Drawing.Size(146, 30);
+            this.btnListTuDaThuoc.TabIndex = 12;
+            this.btnListTuDaThuoc.Text = "List Tu Da Thuoc";
+            this.btnListTuDaThuoc.UseVisualStyleBackColor = true;
+            this.btnListTuDaThuoc.Click += new System.EventHandler(this.btnTuDaThuoc_Click);
+            // 
+            // btnAllTu
+            // 
+            this.btnAllTu.Location = new System.Drawing.Point(76, 289);
+            this.btnAllTu.Name = "btnAllTu";
+            this.btnAllTu.Size = new System.Drawing.Size(146, 30);
+            this.btnAllTu.TabIndex = 12;
+            this.btnAllTu.Text = "All Tu";
+            this.btnAllTu.UseVisualStyleBackColor = true;
+            this.btnAllTu.Click += new System.EventHandler(this.btnAllTu_Click_1);
+            // 
+            // cbCaiDatHienThi
+            // 
+            this.cbCaiDatHienThi.FormattingEnabled = true;
+            this.cbCaiDatHienThi.Items.AddRange(new object[] {
+            "Mặt trước",
+            "Mặt sau",
+            "2 mặt"});
+            this.cbCaiDatHienThi.Location = new System.Drawing.Point(158, 555);
+            this.cbCaiDatHienThi.Name = "cbCaiDatHienThi";
+            this.cbCaiDatHienThi.Size = new System.Drawing.Size(121, 24);
+            this.cbCaiDatHienThi.TabIndex = 14;
+            this.cbCaiDatHienThi.SelectedIndexChanged += new System.EventHandler(this.cbCaiDatHienThi_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 558);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 17);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Cài đặt hiển thị";
+            // 
+            // pnFlashCard
+            // 
+            this.pnFlashCard.Controls.Add(this.btnNext);
+            this.pnFlashCard.Controls.Add(this.panel2);
+            this.pnFlashCard.Controls.Add(this.btnPre);
+            this.pnFlashCard.Controls.Add(this.btnFlip);
+            this.pnFlashCard.Controls.Add(this.btnTuChuaThuoc);
+            this.pnFlashCard.Controls.Add(this.btnListTuDaThuoc);
+            this.pnFlashCard.Location = new System.Drawing.Point(313, 24);
+            this.pnFlashCard.Name = "pnFlashCard";
+            this.pnFlashCard.Size = new System.Drawing.Size(520, 588);
+            this.pnFlashCard.TabIndex = 16;
             // 
             // NhomTu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1342, 644);
+            this.ClientSize = new System.Drawing.Size(853, 626);
+            this.Controls.Add(this.pnFlashCard);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cbCaiDatHienThi);
+            this.Controls.Add(this.btnAllTu);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numDaysRecall);
+            this.Controls.Add(this.numIndexWord);
             this.Controls.Add(this.monthCalendar1);
-            this.Controls.Add(this.btnFlip);
-            this.Controls.Add(this.btnRemembed);
-            this.Controls.Add(this.btnForget);
-            this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.btnPre);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Name = "NhomTu";
             this.Text = "NhomTu";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NhomTu_FormClosing);
             this.Load += new System.EventHandler(this.NhomTu_Load);
-            this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.pnBack.ResumeLayout(false);
+            this.pnFront.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numIndexWord)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDaysRecall)).EndInit();
+            this.pnFlashCard.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.HScrollBar hScrollBar1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lbTagName;
         private System.Windows.Forms.Label lbExample;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rb30;
-        private System.Windows.Forms.RadioButton rb15;
-        private System.Windows.Forms.RadioButton rb10;
-        private System.Windows.Forms.RadioButton rb7;
-        private System.Windows.Forms.RadioButton rb5;
-        private System.Windows.Forms.RadioButton rb4;
-        private System.Windows.Forms.RadioButton rb2;
-        private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.Button btnPre;
         private System.Windows.Forms.Button btnNext;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btnForget;
         private System.Windows.Forms.Button btnRemembed;
         private System.Windows.Forms.Button btnFlip;
@@ -340,5 +342,17 @@
         private System.Windows.Forms.Label lbIPA;
         private System.Windows.Forms.Label lbPathOfSpeech;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.Panel pnFront;
+        private System.Windows.Forms.Panel pnBack;
+        private System.Windows.Forms.NumericUpDown numIndexWord;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numDaysRecall;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnTuChuaThuoc;
+        private System.Windows.Forms.Button btnListTuDaThuoc;
+        private System.Windows.Forms.Button btnAllTu;
+        private System.Windows.Forms.ComboBox cbCaiDatHienThi;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel pnFlashCard;
     }
 }

@@ -31,8 +31,8 @@
             this.btnNewGroup = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pnShow = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pnMain = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -42,7 +42,7 @@
             this.btnNewGroup.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnNewGroup.Location = new System.Drawing.Point(0, 0);
             this.btnNewGroup.Name = "btnNewGroup";
-            this.btnNewGroup.Size = new System.Drawing.Size(300, 39);
+            this.btnNewGroup.Size = new System.Drawing.Size(400, 39);
             this.btnNewGroup.TabIndex = 0;
             this.btnNewGroup.Text = "Chu de moi";
             this.btnNewGroup.UseVisualStyleBackColor = true;
@@ -65,32 +65,32 @@
             this.pnShow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnShow.Location = new System.Drawing.Point(0, 227);
             this.pnShow.Name = "pnShow";
-            this.pnShow.Size = new System.Drawing.Size(300, 588);
+            this.pnShow.Size = new System.Drawing.Size(400, 588);
             this.pnShow.TabIndex = 3;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(300, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1159, 815);
-            this.panel1.TabIndex = 3;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Location = new System.Drawing.Point(0, 39);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(300, 188);
+            this.pictureBox1.Size = new System.Drawing.Size(400, 188);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // pnMain
+            // 
+            this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnMain.Location = new System.Drawing.Point(400, 0);
+            this.pnMain.Name = "pnMain";
+            this.pnMain.Size = new System.Drawing.Size(1059, 815);
+            this.pnMain.TabIndex = 3;
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1459, 815);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnMain);
             this.Controls.Add(this.panel2);
             this.Name = "Menu";
             this.Text = "Menu";
@@ -106,6 +106,6 @@
         private System.Windows.Forms.Button btnNewGroup;
         public System.Windows.Forms.FlowLayoutPanel pnShow;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnMain;
     }
 }
