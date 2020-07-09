@@ -70,6 +70,7 @@ namespace FlashCard.View
                     pnFront.BackColor = Color.Gray;
                 }
                 numIndexWord.Value = indexWord;
+                numDaysRecall.Value = lstCurrentWords[currentIndexWord].Step;
             }
             catch
             {
@@ -118,58 +119,27 @@ namespace FlashCard.View
             {
                 string[] words = lines[i].Split(',');
 
-                Word word = new Word();
-                word.tagName = words[0];
-                word.mean = words[1];
-                word.startTime = Convert.ToDateTime(words[2]);
-                word.Step = Convert.ToInt32(words[3]);
-                word.ATTT = words[4];
-                word.IPA = words[5];
-                word.pathOfSpeech = words[6];
-                word.Example = words[7];
-                word.Status = Status.willRecall;
-
-                int time = DateTime.Now.Day - word.startTime.Day;
-                if (time % word.Step == 0)
+                Word word = new Word()
                 {
-                    lstWords0.Add(word);
-                }
-                else if (time % word.Step == 1)
-                {
-                    lstWords1.Add(word);
-                }
-                else if (time % word.Step == 2)
-                {
-                    lstWords2.Add(word);
-                }
-                else if (time % word.Step == 3)
-                {
-                    lstWords3.Add(word);
-                }
-                else if (time % word.Step == 4)
-                {
-                    lstWords4.Add(word);
-                }
-                else if (time % word.Step == 5)
-                {
-                    lstWords5.Add(word);
-                }
-                else if (time % word.Step == 6)
-                {
-                    lstWords6.Add(word);
-                }
-                else if (time % word.Step == 7)
-                {
-                    lstWords7.Add(word);
-                }
-
+                    tagName = words[0],
+                    mean = words[1],
+                    startTime = Convert.ToDateTime(words[2]),
+                    Step = Convert.ToInt32(words[3]),
+                    ATTT = words[4],
+                    IPA = words[5],
+                    pathOfSpeech = words[6],
+                    Example = words[7],
+                    Status = Status.willRecall
+                };
 
                 lstAllWords.Add(word);
             }
+
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
+            lstAllWordsByDay.Clear();
             pnFlashCard.Visible = true;
             filterList = Filter.ByDay;
 
@@ -181,41 +151,34 @@ namespace FlashCard.View
             btnForget.Enabled = true;
             btnRemembed.Enabled = true;
 
+            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".csv");
+            string[] lines = File.ReadAllLines(filePath);
+
+            for (int i = 1; i < lines.Length; i++)
+            {
+                string[] words = lines[i].Split(',');
+
+                Word word = new Word();
+                word.tagName = words[0];
+                word.mean = words[1];
+                word.startTime = Convert.ToDateTime(words[2]);
+                word.Step = Convert.ToInt32(words[3]);
+                word.ATTT = words[4];
+                word.IPA = words[5];
+                word.pathOfSpeech = words[6];
+                word.Example = words[7];
+                word.Status = Status.willRecall;
+
+                DateTime dateTimePicked = monthCalendar1.SelectionStart.Date;
+                int timeStep = dateTimePicked.Day - word.startTime.Day;
+                if (timeStep % word.Step == 0 && timeStep!=0)
+                {
+                    lstAllWordsByDay.Add(word);
+                }
+            }
+
             MessageBox.Show(monthCalendar1.SelectionStart.Date.ToString());
-            DateTime dateTimePicked = monthCalendar1.SelectionStart.Date;
-            int time = dateTimePicked.Day - DateTime.Now.Day;
-            if (time == 0)
-            {
-                lstAllWordsByDay = lstWords0;
-            }
-            else if (time == 1)
-            {
-                lstAllWordsByDay = lstWords1;
-            }
-            else if (time == 2)
-            {
-                lstAllWordsByDay = lstWords2;
-            }
-            else if (time == 3)
-            {
-                lstAllWordsByDay = lstWords3;
-            }
-            else if (time == 4)
-            {
-                lstAllWordsByDay = lstWords4;
-            }
-            else if (time == 5)
-            {
-                lstAllWordsByDay = lstWords5;
-            }
-            else if (time == 6)
-            {
-                lstAllWordsByDay = lstWords6;
-            }
-            else if (time == 7)
-            {
-                lstAllWordsByDay = lstWords7;
-            }
+
             try
             {
                 lstCurrentWords = lstAllWordsByDay;
@@ -364,7 +327,7 @@ namespace FlashCard.View
 
         private void btnTuDaThuoc_Click(object sender, EventArgs e)
         {
-           
+
             if (filterList == Filter.AllList)
             {
                 lstCurrentWords = lstAllWords;
@@ -451,6 +414,7 @@ namespace FlashCard.View
             btnForget.Enabled = true;
             btnRemembed.Enabled = true;
 
+           
             lstCurrentWords = lstAllWords;
             currentWord = lstCurrentWords[0];
             currentIndexWord = 0;
@@ -482,6 +446,25 @@ namespace FlashCard.View
                 pnFront.Visible = true;
             }
 
+        }
+
+        private void NhomTu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string csvHeader = "tagName,mean,StartTime,Step,ATTT,IPA,pathOfSpeech,Example";
+            foreach(Word word in lstAllWords)
+            {
+                csvHeader += $"\n {word.tagName},{word.mean},{DateTime.Now},{word.Step},{word.ATTT},{word.IPA},{word.pathOfSpeech},{word.Example}";
+            }
+            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text+ ".csv");
+            try
+            {
+                    File.WriteAllText(filePath, csvHeader);
+                    MessageBox.Show("Ban nho doi lai lich on tu");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

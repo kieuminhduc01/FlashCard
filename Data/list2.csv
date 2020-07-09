@@ -1,4 +1,4 @@
-tagName,mean,StartTime,Step,ATTT,Group,pathOfSpeech
-mean2,nghia,2020/7/3,3,min,n,n
-mean2,nghia,2020/7/3,3,min,n,n
-mean2,nghia,2020/7,3,3,min,n,n
+tagName,mean,StartTime,Step,ATTT,IPA,pathOfSpeech,Example
+          mean2,nghia,7/9/2020 9:10:42 AM,6,min,n,n,1
+          mean2,nghia,7/9/2020 9:10:42 AM,4,min,n,n,1
+          mean2,nghia,7/9/2020 9:10:42 AM,3,3,min,n,n

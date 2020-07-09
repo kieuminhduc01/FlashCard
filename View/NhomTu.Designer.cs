@@ -316,6 +316,7 @@
             this.Controls.Add(this.monthCalendar1);
             this.Name = "NhomTu";
             this.Text = "NhomTu";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NhomTu_FormClosing);
             this.Load += new System.EventHandler(this.NhomTu_Load);
             this.panel2.ResumeLayout(false);
             this.pnBack.ResumeLayout(false);
