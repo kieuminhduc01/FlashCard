@@ -28,84 +28,125 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnNewGroup = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pnShow = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnMain = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnNewGroup = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pnShow = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnNewGroup
-            // 
-            this.btnNewGroup.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnNewGroup.Location = new System.Drawing.Point(0, 0);
-            this.btnNewGroup.Name = "btnNewGroup";
-            this.btnNewGroup.Size = new System.Drawing.Size(400, 39);
-            this.btnNewGroup.TabIndex = 0;
-            this.btnNewGroup.Text = "Chu de moi";
-            this.btnNewGroup.UseVisualStyleBackColor = true;
-            this.btnNewGroup.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.pnShow);
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.btnNewGroup);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Controls.Add(this.pnMain);
+            this.panel2.Controls.Add(this.panel1);
+            this.panel2.Controls.Add(this.panel4);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(400, 815);
+            this.panel2.Size = new System.Drawing.Size(1541, 915);
             this.panel2.TabIndex = 2;
-            // 
-            // pnShow
-            // 
-            this.pnShow.AutoScroll = true;
-            this.pnShow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnShow.Location = new System.Drawing.Point(0, 227);
-            this.pnShow.Name = "pnShow";
-            this.pnShow.Size = new System.Drawing.Size(400, 588);
-            this.pnShow.TabIndex = 3;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 39);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 188);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // pnMain
             // 
             this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnMain.Location = new System.Drawing.Point(400, 0);
+            this.pnMain.Location = new System.Drawing.Point(275, 59);
             this.pnMain.Name = "pnMain";
-            this.pnMain.Size = new System.Drawing.Size(1059, 815);
+            this.pnMain.Size = new System.Drawing.Size(1266, 856);
             this.pnMain.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.btnNewGroup);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(275, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1266, 59);
+            this.panel1.TabIndex = 4;
+            // 
+            // btnNewGroup
+            // 
+            this.btnNewGroup.BackColor = System.Drawing.Color.White;
+            this.btnNewGroup.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnNewGroup.FlatAppearance.BorderSize = 0;
+            this.btnNewGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewGroup.Font = new System.Drawing.Font("Microsoft YaHei", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewGroup.Image = ((System.Drawing.Image)(resources.GetObject("btnNewGroup.Image")));
+            this.btnNewGroup.Location = new System.Drawing.Point(0, 0);
+            this.btnNewGroup.Name = "btnNewGroup";
+            this.btnNewGroup.Size = new System.Drawing.Size(193, 59);
+            this.btnNewGroup.TabIndex = 0;
+            this.btnNewGroup.Text = "New a list";
+            this.btnNewGroup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnNewGroup.UseVisualStyleBackColor = false;
+            this.btnNewGroup.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.pnShow);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(275, 915);
+            this.panel4.TabIndex = 6;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(275, 125);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Flash Card Recall";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // pnShow
+            // 
+            this.pnShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
+            this.pnShow.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnShow.Location = new System.Drawing.Point(0, 125);
+            this.pnShow.Name = "pnShow";
+            this.pnShow.Size = new System.Drawing.Size(275, 790);
+            this.pnShow.TabIndex = 3;
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1459, 815);
-            this.Controls.Add(this.pnMain);
+            this.ClientSize = new System.Drawing.Size(1546, 920);
             this.Controls.Add(this.panel2);
+            this.ForeColor = System.Drawing.Color.Green;
             this.Name = "Menu";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.Menu_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Menu_MouseDown);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnNewGroup;
         public System.Windows.Forms.FlowLayoutPanel pnShow;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel pnMain;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnNewGroup;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button button1;
     }
 }
