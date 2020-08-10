@@ -47,22 +47,19 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.numIndexWord = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.numDaysRecall = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnTuChuaThuoc = new System.Windows.Forms.Button();
             this.btnListTuDaThuoc = new System.Windows.Forms.Button();
             this.btnAllTu = new System.Windows.Forms.Button();
             this.cbCaiDatHienThi = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pnFlashCard = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.tbnTimTheoNgay = new System.Windows.Forms.Button();
             this.monthCalendarNgayOnLai = new System.Windows.Forms.MonthCalendar();
+            this.btnTuChuaCoLichOn = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.pnBack.SuspendLayout();
             this.pnFront.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numIndexWord)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDaysRecall)).BeginInit();
             this.pnFlashCard.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -276,25 +273,6 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Từ thứ";
             // 
-            // numDaysRecall
-            // 
-            this.numDaysRecall.Location = new System.Drawing.Point(173, 529);
-            this.numDaysRecall.Name = "numDaysRecall";
-            this.numDaysRecall.Size = new System.Drawing.Size(138, 22);
-            this.numDaysRecall.TabIndex = 9;
-            this.numDaysRecall.ValueChanged += new System.EventHandler(this.numDaysRecall_ValueChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
-            this.label2.Location = new System.Drawing.Point(17, 527);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 24);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Ngày ôn lại";
-            // 
             // btnTuChuaThuoc
             // 
             this.btnTuChuaThuoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
@@ -343,7 +321,7 @@
             "Mặt trước",
             "Mặt sau",
             "2 mặt"});
-            this.cbCaiDatHienThi.Location = new System.Drawing.Point(176, 568);
+            this.cbCaiDatHienThi.Location = new System.Drawing.Point(173, 529);
             this.cbCaiDatHienThi.Name = "cbCaiDatHienThi";
             this.cbCaiDatHienThi.Size = new System.Drawing.Size(136, 24);
             this.cbCaiDatHienThi.TabIndex = 14;
@@ -354,7 +332,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
-            this.label3.Location = new System.Drawing.Point(17, 566);
+            this.label3.Location = new System.Drawing.Point(14, 527);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 24);
             this.label3.TabIndex = 15;
@@ -372,17 +350,6 @@
             this.pnFlashCard.Name = "pnFlashCard";
             this.pnFlashCard.Size = new System.Drawing.Size(585, 723);
             this.pnFlashCard.TabIndex = 16;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
-            this.label4.Location = new System.Drawing.Point(317, 529);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 24);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "1,2,4,7,10";
             // 
             // tbnTimTheoNgay
             // 
@@ -404,22 +371,37 @@
             this.monthCalendarNgayOnLai.Location = new System.Drawing.Point(17, 246);
             this.monthCalendarNgayOnLai.Name = "monthCalendarNgayOnLai";
             this.monthCalendarNgayOnLai.TabIndex = 19;
+            this.monthCalendarNgayOnLai.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarNgayOnLai_DateChanged);
+            // 
+            // btnTuChuaCoLichOn
+            // 
+            this.btnTuChuaCoLichOn.AccessibleRole = System.Windows.Forms.AccessibleRole.IpAddress;
+            this.btnTuChuaCoLichOn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
+            this.btnTuChuaCoLichOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.btnTuChuaCoLichOn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTuChuaCoLichOn.Image = ((System.Drawing.Image)(resources.GetObject("btnTuChuaCoLichOn.Image")));
+            this.btnTuChuaCoLichOn.Location = new System.Drawing.Point(312, 335);
+            this.btnTuChuaCoLichOn.Name = "btnTuChuaCoLichOn";
+            this.btnTuChuaCoLichOn.Size = new System.Drawing.Size(164, 41);
+            this.btnTuChuaCoLichOn.TabIndex = 20;
+            this.btnTuChuaCoLichOn.Text = "Từ có lịch ôn";
+            this.btnTuChuaCoLichOn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTuChuaCoLichOn.UseVisualStyleBackColor = false;
+            this.btnTuChuaCoLichOn.Click += new System.EventHandler(this.button1_Click);
             // 
             // NhomTu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1150, 769);
+            this.Controls.Add(this.btnTuChuaCoLichOn);
             this.Controls.Add(this.monthCalendarNgayOnLai);
             this.Controls.Add(this.tbnTimTheoNgay);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.pnFlashCard);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbCaiDatHienThi);
             this.Controls.Add(this.btnAllTu);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numDaysRecall);
             this.Controls.Add(this.numIndexWord);
             this.Controls.Add(this.monthCalendar1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -433,7 +415,6 @@
             this.pnBack.ResumeLayout(false);
             this.pnFront.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numIndexWord)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDaysRecall)).EndInit();
             this.pnFlashCard.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -457,8 +438,6 @@
         private System.Windows.Forms.Panel pnBack;
         private System.Windows.Forms.NumericUpDown numIndexWord;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numDaysRecall;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnTuChuaThuoc;
         private System.Windows.Forms.Button btnListTuDaThuoc;
         private System.Windows.Forms.Button btnAllTu;
@@ -467,8 +446,8 @@
         private System.Windows.Forms.Panel pnFlashCard;
         private System.Windows.Forms.Label lbTuTongSo;
         private System.Windows.Forms.Label lbATTT;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button tbnTimTheoNgay;
         private System.Windows.Forms.MonthCalendar monthCalendarNgayOnLai;
+        private System.Windows.Forms.Button btnTuChuaCoLichOn;
     }
 }

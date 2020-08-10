@@ -24,15 +24,8 @@ namespace FlashCard.View
         List<Word> lstWordsRemembed = new List<Word>();
         List<Word> lstWordsRepeat = new List<Word>();
         List<Word> lstAllWords = new List<Word>();
+        List<Word> lstTuChuaCoLichOn = new List<Word>();
 
-        List<Word> lstWords0 = new List<Word>();
-        List<Word> lstWords1 = new List<Word>();
-        List<Word> lstWords2 = new List<Word>();
-        List<Word> lstWords3 = new List<Word>();
-        List<Word> lstWords4 = new List<Word>();
-        List<Word> lstWords5 = new List<Word>();
-        List<Word> lstWords6 = new List<Word>();
-        List<Word> lstWords7 = new List<Word>();
 
         List<Word> lstCurrentWords = new List<Word>();
         FilterEnum filterList;
@@ -74,7 +67,7 @@ namespace FlashCard.View
                     pnFront.BackColor = Color.Gray;
                 }
                 numIndexWord.Value = indexWord;
-                numDaysRecall.Value = lstCurrentWords[currentIndexWord].Step;
+                monthCalendarNgayOnLai.SetDate(lstCurrentWords[currentIndexWord].Step);
                 lbTuTongSo.Text = numIndexWord.Value + "/" + (lstCurrentWords.Count() - 1);
             }
             catch
@@ -139,7 +132,7 @@ namespace FlashCard.View
                         word.tagName = dr[0].ToString();
                         word.mean = dr[1].ToString();
                         word.startTime = Convert.ToDateTime(dr[2].ToString());
-                        word.Step = Convert.ToInt32(dr[3].ToString());
+                        word.Step = Convert.ToDateTime(dr[3].ToString());
                         word.ATTT = dr[4].ToString();
                         word.IPA = dr[5].ToString();
                         word.pathOfSpeech = dr[6].ToString();
@@ -147,6 +140,11 @@ namespace FlashCard.View
                         word.Status = Status.willRecall;
 
                         lstAllWords.Add(word);
+
+                        if (word.Step < DateTime.Now)
+                        {
+                            lstTuChuaCoLichOn.Add(word);
+                        }
                     }
                 }
             }
@@ -173,11 +171,10 @@ namespace FlashCard.View
             currentIndexWord++;
             currentWord = lstCurrentWords[currentIndexWord];
             HienThe(currentIndexWord);
-            numDaysRecall.Value = currentWord.Step;
-
+            monthCalendarNgayOnLai.SetDate(currentWord.Step);
             try
             {
-                currentWord.Step = Convert.ToInt32(numDaysRecall.Value);
+                currentWord.Step = monthCalendarNgayOnLai.SelectionRange.Start;
             }
             catch
             {
@@ -206,11 +203,11 @@ namespace FlashCard.View
             currentIndexWord--;
             currentWord = lstCurrentWords[currentIndexWord];
             HienThe(currentIndexWord);
-            numDaysRecall.Value = currentWord.Step;
+            monthCalendarNgayOnLai.SetDate(currentWord.Step);
 
             try
             {
-                currentWord.Step = Convert.ToInt32(numDaysRecall.Value);
+                currentWord.Step = monthCalendarNgayOnLai.SelectionRange.Start;
             }
             catch
             {
@@ -262,7 +259,8 @@ namespace FlashCard.View
                 currentIndexWord = Convert.ToInt32(numIndexWord.Value);
                 currentWord = lstCurrentWords[currentIndexWord];
                 HienThe(currentIndexWord);
-                numDaysRecall.Value = currentWord.Step;
+                monthCalendarNgayOnLai.SetDate(currentWord.Step);
+
             }
             catch
             {
@@ -276,7 +274,8 @@ namespace FlashCard.View
         {
             try
             {
-                currentWord.Step = Convert.ToInt32(numDaysRecall.Value);
+                monthCalendarNgayOnLai.SetDate(currentWord.Step);
+
                 currentWord.startTime = DateTime.Now;
             }
             catch
@@ -463,16 +462,13 @@ namespace FlashCard.View
             btnFlip.Enabled = true;
             btnForget.Enabled = true;
             btnRemembed.Enabled = true;
-            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
-
 
             foreach (Word w in lstAllWords)
             {
                 w.Status = Status.willRecall;
 
                 DateTime dateTimePicked = monthCalendar1.SelectionStart.Date;
-                int timeStep = dateTimePicked.Day - w.startTime.Day;
-                if (timeStep % w.Step == 0)
+                if (dateTimePicked == w.Step.Date)
                 {
                     lstAllWordsByDay.Add(w);
                 }
@@ -502,6 +498,40 @@ namespace FlashCard.View
             }
 
             ButtonShowOrNot();
+        }
+
+        private void monthCalendarNgayOnLai_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            currentWord.Step = monthCalendarNgayOnLai.SelectionRange.Start;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (lstTuChuaCoLichOn.Count() > 0)
+            {
+                filterList = FilterEnum.LichOnTrongQuaKhu;
+                pnFlashCard.Visible = true;
+
+                btnListTuDaThuoc.Enabled = true;
+                btnTuChuaThuoc.Enabled = true;
+                btnPre.Enabled = true;
+                btnNext.Enabled = true;
+                btnFlip.Enabled = true;
+                btnForget.Enabled = true;
+                btnRemembed.Enabled = true;
+
+
+                lstCurrentWords = lstTuChuaCoLichOn;
+                currentWord = lstCurrentWords[0];
+                currentIndexWord = 0;
+                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+                HienThe(currentIndexWord);
+                ButtonShowOrNot();
+            }
+            else
+            {
+                MessageBox.Show("Không có từ nào có lịch ôn trong quá khứ");
+            }
         }
     }
 }

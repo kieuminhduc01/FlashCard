@@ -9,6 +9,7 @@ namespace FlashCard.Model.Enum
     public enum FilterEnum
     {
         AllList,
-        ByDay
+        ByDay,
+        LichOnTrongQuaKhu
     }
 }
