@@ -35,12 +35,12 @@
             this.lbATTT = new System.Windows.Forms.Label();
             this.lbMean = new System.Windows.Forms.Label();
             this.lbPathOfSpeech = new System.Windows.Forms.Label();
-            this.lbIPA = new System.Windows.Forms.Label();
             this.btnForget = new System.Windows.Forms.Button();
             this.btnRemembed = new System.Windows.Forms.Button();
             this.pnFront = new System.Windows.Forms.Panel();
             this.lbTagName = new System.Windows.Forms.Label();
             this.lbExample = new System.Windows.Forms.Label();
+            this.lbIPA = new System.Windows.Forms.Label();
             this.btnFlip = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPre = new System.Windows.Forms.Button();
@@ -55,6 +55,9 @@
             this.cbCaiDatHienThi = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pnFlashCard = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbnTimTheoNgay = new System.Windows.Forms.Button();
+            this.monthCalendarNgayOnLai = new System.Windows.Forms.MonthCalendar();
             this.panel2.SuspendLayout();
             this.pnBack.SuspendLayout();
             this.pnFront.SuspendLayout();
@@ -91,7 +94,6 @@
             this.pnBack.Controls.Add(this.lbATTT);
             this.pnBack.Controls.Add(this.lbMean);
             this.pnBack.Controls.Add(this.lbPathOfSpeech);
-            this.pnBack.Controls.Add(this.lbIPA);
             this.pnBack.Location = new System.Drawing.Point(12, 329);
             this.pnBack.Name = "pnBack";
             this.pnBack.Size = new System.Drawing.Size(539, 266);
@@ -132,18 +134,6 @@
             this.lbPathOfSpeech.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbPathOfSpeech.Click += new System.EventHandler(this.lbPathOfSpeech_Click);
             // 
-            // lbIPA
-            // 
-            this.lbIPA.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbIPA.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbIPA.Location = new System.Drawing.Point(150, 54);
-            this.lbIPA.Name = "lbIPA";
-            this.lbIPA.Size = new System.Drawing.Size(270, 32);
-            this.lbIPA.TabIndex = 1;
-            this.lbIPA.Text = "IPA";
-            this.lbIPA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbIPA.Click += new System.EventHandler(this.label3_Click);
-            // 
             // btnForget
             // 
             this.btnForget.BackColor = System.Drawing.SystemColors.Control;
@@ -177,6 +167,7 @@
             this.pnFront.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnFront.Controls.Add(this.lbTagName);
             this.pnFront.Controls.Add(this.lbExample);
+            this.pnFront.Controls.Add(this.lbIPA);
             this.pnFront.Location = new System.Drawing.Point(12, 57);
             this.pnFront.Name = "pnFront";
             this.pnFront.Size = new System.Drawing.Size(539, 266);
@@ -205,6 +196,18 @@
             this.lbExample.Text = "Example";
             this.lbExample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbExample.Click += new System.EventHandler(this.lbExample_Click);
+            // 
+            // lbIPA
+            // 
+            this.lbIPA.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbIPA.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbIPA.Location = new System.Drawing.Point(379, 214);
+            this.lbIPA.Name = "lbIPA";
+            this.lbIPA.Size = new System.Drawing.Size(155, 41);
+            this.lbIPA.TabIndex = 1;
+            this.lbIPA.Text = "IPA";
+            this.lbIPA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbIPA.Click += new System.EventHandler(this.label3_Click);
             // 
             // btnFlip
             // 
@@ -324,7 +327,7 @@
             this.btnAllTu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.btnAllTu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAllTu.Image = ((System.Drawing.Image)(resources.GetObject("btnAllTu.Image")));
-            this.btnAllTu.Location = new System.Drawing.Point(93, 253);
+            this.btnAllTu.Location = new System.Drawing.Point(312, 81);
             this.btnAllTu.Name = "btnAllTu";
             this.btnAllTu.Size = new System.Drawing.Size(124, 41);
             this.btnAllTu.TabIndex = 12;
@@ -370,11 +373,46 @@
             this.pnFlashCard.Size = new System.Drawing.Size(585, 723);
             this.pnFlashCard.TabIndex = 16;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
+            this.label4.Location = new System.Drawing.Point(317, 529);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(90, 24);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "1,2,4,7,10";
+            // 
+            // tbnTimTheoNgay
+            // 
+            this.tbnTimTheoNgay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
+            this.tbnTimTheoNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.tbnTimTheoNgay.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tbnTimTheoNgay.Image = ((System.Drawing.Image)(resources.GetObject("tbnTimTheoNgay.Image")));
+            this.tbnTimTheoNgay.Location = new System.Drawing.Point(283, 34);
+            this.tbnTimTheoNgay.Name = "tbnTimTheoNgay";
+            this.tbnTimTheoNgay.Size = new System.Drawing.Size(176, 41);
+            this.tbnTimTheoNgay.TabIndex = 18;
+            this.tbnTimTheoNgay.Text = "Tìm theo ngày";
+            this.tbnTimTheoNgay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.tbnTimTheoNgay.UseVisualStyleBackColor = false;
+            this.tbnTimTheoNgay.Click += new System.EventHandler(this.tbnTimTheoNgay_Click);
+            // 
+            // monthCalendarNgayOnLai
+            // 
+            this.monthCalendarNgayOnLai.Location = new System.Drawing.Point(17, 246);
+            this.monthCalendarNgayOnLai.Name = "monthCalendarNgayOnLai";
+            this.monthCalendarNgayOnLai.TabIndex = 19;
+            // 
             // NhomTu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1150, 769);
+            this.Controls.Add(this.monthCalendarNgayOnLai);
+            this.Controls.Add(this.tbnTimTheoNgay);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.pnFlashCard);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbCaiDatHienThi);
@@ -429,5 +467,8 @@
         private System.Windows.Forms.Panel pnFlashCard;
         private System.Windows.Forms.Label lbTuTongSo;
         private System.Windows.Forms.Label lbATTT;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button tbnTimTheoNgay;
+        private System.Windows.Forms.MonthCalendar monthCalendarNgayOnLai;
     }
 }

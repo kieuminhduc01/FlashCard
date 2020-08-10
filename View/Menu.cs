@@ -122,5 +122,14 @@ namespace FlashCard.View
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+
+        private void Menu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (pnMain.Controls.Count > 0)
+            {
+                MessageBox.Show("save thay doi truoc khi dong form");
+                e.Cancel = true;
+            }
+        }
     }
 }

@@ -57,6 +57,7 @@ namespace FlashCard.View
                 lbMean.Text = currentWord.mean;
                 lbExample.Text = currentWord.Example;
                 lbATTT.Text = currentWord.ATTT;
+                currentWord.startTime = DateTime.Now;
                 if (currentWord.Status == Status.forget)
                 {
                     pnBack.BackColor = Color.FromArgb(211, 59, 2);
@@ -107,7 +108,6 @@ namespace FlashCard.View
         private void NhomTu_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-
             btnListTuDaThuoc.Enabled = false;
             btnTuChuaThuoc.Enabled = false;
             btnPre.Enabled = false;
@@ -154,80 +154,6 @@ namespace FlashCard.View
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-            lstAllWordsByDay.Clear();
-            pnFlashCard.Visible = true;
-            filterList = FilterEnum.ByDay;
-
-            btnListTuDaThuoc.Enabled = true;
-            btnTuChuaThuoc.Enabled = true;
-            btnPre.Enabled = true;
-            btnNext.Enabled = true;
-            btnFlip.Enabled = true;
-            btnForget.Enabled = true;
-            btnRemembed.Enabled = true;
-            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
-
-            System.Data.DataTable dtTable;
-            using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
-            {
-                using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
-                {
-                    DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
-                    {
-                        ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
-                    });
-                    dtTable = result.Tables[0];
-
-                    foreach (DataRow dr in dtTable.Rows)
-                    {
-
-                        Word word = new Word();
-                        word.tagName = dr[0].ToString();
-                        word.mean = dr[1].ToString();
-                        word.startTime = Convert.ToDateTime(dr[2].ToString());
-                        word.Step = Convert.ToInt32(dr[3].ToString());
-                        word.ATTT = dr[4].ToString();
-                        word.IPA = dr[5].ToString();
-                        word.pathOfSpeech = dr[6].ToString();
-                        word.Example = dr[7].ToString();
-                        word.Status = Status.willRecall;
-
-                        DateTime dateTimePicked = monthCalendar1.SelectionStart.Date;
-                        int timeStep = dateTimePicked.Day - word.startTime.Day;
-                        if (timeStep % word.Step == 0)
-                        {
-                            lstAllWordsByDay.Add(word);
-                        }
-                    }
-
-
-                }
-            }
-
-
-            if (lstAllWordsByDay.Count() == 0)
-            {
-
-                pnFlashCard.Visible = false;
-                MessageBox.Show("Ngày này không có lịch ôn");
-                return;
-            }
-
-            MessageBox.Show(monthCalendar1.SelectionStart.Date.ToString());
-
-            try
-            {
-                lstCurrentWords = lstAllWordsByDay;
-                HienThe(0);
-            }
-            catch { }
-            finally
-            {
-                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
-                numIndexWord.Minimum = 0;
-            }
-
-            ButtonShowOrNot();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -291,7 +217,6 @@ namespace FlashCard.View
 
             }
             ButtonShowOrNot();
-
         }
 
         private void btnFlip_Click(object sender, EventArgs e)
@@ -308,7 +233,6 @@ namespace FlashCard.View
                 pnBack.Visible = false;
                 side = 1;
             }
-
         }
 
         private void lbPathOfSpeech_Click(object sender, EventArgs e)
@@ -357,9 +281,7 @@ namespace FlashCard.View
             }
             catch
             {
-
             }
-
         }
 
         private void btnTuDaThuoc_Click(object sender, EventArgs e)
@@ -528,6 +450,59 @@ namespace FlashCard.View
 
         }
 
+        private void tbnTimTheoNgay_Click(object sender, EventArgs e)
+        {
+            lstAllWordsByDay.Clear();
+            pnFlashCard.Visible = true;
+            filterList = FilterEnum.ByDay;
+
+            btnListTuDaThuoc.Enabled = true;
+            btnTuChuaThuoc.Enabled = true;
+            btnPre.Enabled = true;
+            btnNext.Enabled = true;
+            btnFlip.Enabled = true;
+            btnForget.Enabled = true;
+            btnRemembed.Enabled = true;
+            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
+
+
+            foreach (Word w in lstAllWords)
+            {
+                w.Status = Status.willRecall;
+
+                DateTime dateTimePicked = monthCalendar1.SelectionStart.Date;
+                int timeStep = dateTimePicked.Day - w.startTime.Day;
+                if (timeStep % w.Step == 0)
+                {
+                    lstAllWordsByDay.Add(w);
+                }
+            }
+
+
+            if (lstAllWordsByDay.Count() == 0)
+            {
+
+                pnFlashCard.Visible = false;
+                MessageBox.Show("Ngày này không có lịch ôn");
+                return;
+            }
+
+            MessageBox.Show(monthCalendar1.SelectionStart.Date.ToString());
+
+            try
+            {
+                lstCurrentWords = lstAllWordsByDay;
+                HienThe(0);
+            }
+            catch { }
+            finally
+            {
+                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+                numIndexWord.Minimum = 0;
+            }
+
+            ButtonShowOrNot();
+        }
     }
 }
 

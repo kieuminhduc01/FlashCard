@@ -129,8 +129,10 @@
             this.ClientSize = new System.Drawing.Size(1546, 920);
             this.Controls.Add(this.panel2);
             this.ForeColor = System.Drawing.Color.Green;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Menu";
             this.Text = "Menu";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.Load += new System.EventHandler(this.Menu_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Menu_MouseDown);
             this.panel2.ResumeLayout(false);
