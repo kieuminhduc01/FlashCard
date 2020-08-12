@@ -37,7 +37,25 @@ namespace FlashCard.View
         public NhomTu()
         {
             InitializeComponent();
+            this.MouseWheel += NhomTu_MouseWheel;
         }
+
+        private void NhomTu_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (side == 1)
+            {
+                pnFront.Visible = false;
+                pnBack.Visible = true;
+                side = 0;
+            }
+            else if (side == 0)
+            {
+                pnFront.Visible = true;
+                pnBack.Visible = false;
+                side = 1;
+            }
+        }
+
         private void HienThe(int indexWord)
         {
             try
@@ -533,6 +551,8 @@ namespace FlashCard.View
                 MessageBox.Show("Không có từ nào có lịch ôn trong quá khứ");
             }
         }
+
+
     }
 }
 
