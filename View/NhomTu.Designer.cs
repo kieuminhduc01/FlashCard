@@ -41,10 +41,9 @@
             this.lbTagName = new System.Windows.Forms.Label();
             this.lbExample = new System.Windows.Forms.Label();
             this.lbIPA = new System.Windows.Forms.Label();
-            this.btnFlip = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPre = new System.Windows.Forms.Button();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.dtpkDsTuOn = new System.Windows.Forms.MonthCalendar();
             this.numIndexWord = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.btnTuChuaThuoc = new System.Windows.Forms.Button();
@@ -54,8 +53,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pnFlashCard = new System.Windows.Forms.Panel();
             this.tbnTimTheoNgay = new System.Windows.Forms.Button();
-            this.monthCalendarNgayOnLai = new System.Windows.Forms.MonthCalendar();
+            this.dtpkSetTgOn = new System.Windows.Forms.MonthCalendar();
             this.btnTuChuaCoLichOn = new System.Windows.Forms.Button();
+            this.cbHienAmThanhTuongTu = new System.Windows.Forms.CheckBox();
             this.panel2.SuspendLayout();
             this.pnBack.SuspendLayout();
             this.pnFront.SuspendLayout();
@@ -70,16 +70,16 @@
             this.panel2.Controls.Add(this.btnForget);
             this.panel2.Controls.Add(this.btnRemembed);
             this.panel2.Controls.Add(this.pnFront);
-            this.panel2.Location = new System.Drawing.Point(9, 53);
+            this.panel2.Location = new System.Drawing.Point(3, 53);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(566, 609);
+            this.panel2.Size = new System.Drawing.Size(557, 609);
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // lbTuTongSo
             // 
             this.lbTuTongSo.AutoSize = true;
-            this.lbTuTongSo.Location = new System.Drawing.Point(257, 25);
+            this.lbTuTongSo.Location = new System.Drawing.Point(240, 16);
             this.lbTuTongSo.Name = "lbTuTongSo";
             this.lbTuTongSo.Size = new System.Drawing.Size(88, 17);
             this.lbTuTongSo.TabIndex = 6;
@@ -138,9 +138,9 @@
             this.btnForget.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnForget.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnForget.Image = ((System.Drawing.Image)(resources.GetObject("btnForget.Image")));
-            this.btnForget.Location = new System.Drawing.Point(495, 16);
+            this.btnForget.Location = new System.Drawing.Point(503, 7);
             this.btnForget.Name = "btnForget";
-            this.btnForget.Size = new System.Drawing.Size(48, 35);
+            this.btnForget.Size = new System.Drawing.Size(39, 35);
             this.btnForget.TabIndex = 5;
             this.btnForget.UseVisualStyleBackColor = false;
             this.btnForget.Click += new System.EventHandler(this.btnForget_Click);
@@ -152,9 +152,9 @@
             this.btnRemembed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemembed.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRemembed.Image = ((System.Drawing.Image)(resources.GetObject("btnRemembed.Image")));
-            this.btnRemembed.Location = new System.Drawing.Point(12, 16);
+            this.btnRemembed.Location = new System.Drawing.Point(12, 7);
             this.btnRemembed.Name = "btnRemembed";
-            this.btnRemembed.Size = new System.Drawing.Size(48, 35);
+            this.btnRemembed.Size = new System.Drawing.Size(39, 35);
             this.btnRemembed.TabIndex = 5;
             this.btnRemembed.UseVisualStyleBackColor = false;
             this.btnRemembed.Click += new System.EventHandler(this.btnRemembed_Click);
@@ -206,28 +206,14 @@
             this.lbIPA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbIPA.Click += new System.EventHandler(this.label3_Click);
             // 
-            // btnFlip
-            // 
-            this.btnFlip.BackColor = System.Drawing.SystemColors.Control;
-            this.btnFlip.FlatAppearance.BorderSize = 0;
-            this.btnFlip.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFlip.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnFlip.Image = ((System.Drawing.Image)(resources.GetObject("btnFlip.Image")));
-            this.btnFlip.Location = new System.Drawing.Point(269, 668);
-            this.btnFlip.Name = "btnFlip";
-            this.btnFlip.Size = new System.Drawing.Size(50, 42);
-            this.btnFlip.TabIndex = 6;
-            this.btnFlip.UseVisualStyleBackColor = false;
-            this.btnFlip.Click += new System.EventHandler(this.btnFlip_Click);
-            // 
             // btnNext
             // 
             this.btnNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
             this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNext.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNext.Location = new System.Drawing.Point(469, 668);
+            this.btnNext.Location = new System.Drawing.Point(290, 668);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(106, 42);
+            this.btnNext.Size = new System.Drawing.Size(270, 69);
             this.btnNext.TabIndex = 4;
             this.btnNext.Text = ">>";
             this.btnNext.UseVisualStyleBackColor = false;
@@ -238,25 +224,25 @@
             this.btnPre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
             this.btnPre.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPre.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnPre.Location = new System.Drawing.Point(9, 668);
+            this.btnPre.Location = new System.Drawing.Point(21, 668);
             this.btnPre.Name = "btnPre";
-            this.btnPre.Size = new System.Drawing.Size(106, 42);
+            this.btnPre.Size = new System.Drawing.Size(263, 69);
             this.btnPre.TabIndex = 3;
             this.btnPre.Text = "<<";
             this.btnPre.UseVisualStyleBackColor = false;
             this.btnPre.Click += new System.EventHandler(this.btnPre_Click);
             // 
-            // monthCalendar1
+            // dtpkDsTuOn
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(17, 34);
-            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 7;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            this.dtpkDsTuOn.Location = new System.Drawing.Point(19, 103);
+            this.dtpkDsTuOn.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
+            this.dtpkDsTuOn.Name = "dtpkDsTuOn";
+            this.dtpkDsTuOn.TabIndex = 7;
+            this.dtpkDsTuOn.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // numIndexWord
             // 
-            this.numIndexWord.Location = new System.Drawing.Point(173, 492);
+            this.numIndexWord.Location = new System.Drawing.Point(144, 702);
             this.numIndexWord.Name = "numIndexWord";
             this.numIndexWord.Size = new System.Drawing.Size(138, 22);
             this.numIndexWord.TabIndex = 9;
@@ -267,7 +253,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
-            this.label1.Location = new System.Drawing.Point(17, 488);
+            this.label1.Location = new System.Drawing.Point(20, 699);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 24);
             this.label1.TabIndex = 10;
@@ -278,9 +264,9 @@
             this.btnTuChuaThuoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
             this.btnTuChuaThuoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTuChuaThuoc.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTuChuaThuoc.Location = new System.Drawing.Point(406, 3);
+            this.btnTuChuaThuoc.Location = new System.Drawing.Point(290, 3);
             this.btnTuChuaThuoc.Name = "btnTuChuaThuoc";
-            this.btnTuChuaThuoc.Size = new System.Drawing.Size(174, 44);
+            this.btnTuChuaThuoc.Size = new System.Drawing.Size(264, 44);
             this.btnTuChuaThuoc.TabIndex = 11;
             this.btnTuChuaThuoc.Text = "Các từ học lại";
             this.btnTuChuaThuoc.UseVisualStyleBackColor = false;
@@ -291,9 +277,9 @@
             this.btnListTuDaThuoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
             this.btnListTuDaThuoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListTuDaThuoc.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnListTuDaThuoc.Location = new System.Drawing.Point(9, 3);
+            this.btnListTuDaThuoc.Location = new System.Drawing.Point(15, 3);
             this.btnListTuDaThuoc.Name = "btnListTuDaThuoc";
-            this.btnListTuDaThuoc.Size = new System.Drawing.Size(172, 44);
+            this.btnListTuDaThuoc.Size = new System.Drawing.Size(269, 44);
             this.btnListTuDaThuoc.TabIndex = 12;
             this.btnListTuDaThuoc.Text = "Các từ đã nhớ";
             this.btnListTuDaThuoc.UseVisualStyleBackColor = false;
@@ -305,7 +291,7 @@
             this.btnAllTu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.btnAllTu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAllTu.Image = ((System.Drawing.Image)(resources.GetObject("btnAllTu.Image")));
-            this.btnAllTu.Location = new System.Drawing.Point(312, 81);
+            this.btnAllTu.Location = new System.Drawing.Point(157, 43);
             this.btnAllTu.Name = "btnAllTu";
             this.btnAllTu.Size = new System.Drawing.Size(124, 41);
             this.btnAllTu.TabIndex = 12;
@@ -321,7 +307,7 @@
             "Mặt trước",
             "Mặt sau",
             "2 mặt"});
-            this.cbCaiDatHienThi.Location = new System.Drawing.Point(173, 529);
+            this.cbCaiDatHienThi.Location = new System.Drawing.Point(144, 737);
             this.cbCaiDatHienThi.Name = "cbCaiDatHienThi";
             this.cbCaiDatHienThi.Size = new System.Drawing.Size(136, 24);
             this.cbCaiDatHienThi.TabIndex = 14;
@@ -332,7 +318,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
-            this.label3.Location = new System.Drawing.Point(14, 527);
+            this.label3.Location = new System.Drawing.Point(20, 736);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 24);
             this.label3.TabIndex = 15;
@@ -343,12 +329,11 @@
             this.pnFlashCard.Controls.Add(this.btnNext);
             this.pnFlashCard.Controls.Add(this.panel2);
             this.pnFlashCard.Controls.Add(this.btnPre);
-            this.pnFlashCard.Controls.Add(this.btnFlip);
             this.pnFlashCard.Controls.Add(this.btnTuChuaThuoc);
             this.pnFlashCard.Controls.Add(this.btnListTuDaThuoc);
             this.pnFlashCard.Location = new System.Drawing.Point(512, 34);
             this.pnFlashCard.Name = "pnFlashCard";
-            this.pnFlashCard.Size = new System.Drawing.Size(585, 723);
+            this.pnFlashCard.Size = new System.Drawing.Size(585, 744);
             this.pnFlashCard.TabIndex = 16;
             // 
             // tbnTimTheoNgay
@@ -357,21 +342,21 @@
             this.tbnTimTheoNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.tbnTimTheoNgay.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.tbnTimTheoNgay.Image = ((System.Drawing.Image)(resources.GetObject("tbnTimTheoNgay.Image")));
-            this.tbnTimTheoNgay.Location = new System.Drawing.Point(283, 34);
+            this.tbnTimTheoNgay.Location = new System.Drawing.Point(19, 43);
             this.tbnTimTheoNgay.Name = "tbnTimTheoNgay";
-            this.tbnTimTheoNgay.Size = new System.Drawing.Size(176, 41);
+            this.tbnTimTheoNgay.Size = new System.Drawing.Size(124, 41);
             this.tbnTimTheoNgay.TabIndex = 18;
-            this.tbnTimTheoNgay.Text = "Tìm theo ngày";
+            this.tbnTimTheoNgay.Text = "Ngày";
             this.tbnTimTheoNgay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.tbnTimTheoNgay.UseVisualStyleBackColor = false;
             this.tbnTimTheoNgay.Click += new System.EventHandler(this.tbnTimTheoNgay_Click);
             // 
-            // monthCalendarNgayOnLai
+            // dtpkSetTgOn
             // 
-            this.monthCalendarNgayOnLai.Location = new System.Drawing.Point(17, 246);
-            this.monthCalendarNgayOnLai.Name = "monthCalendarNgayOnLai";
-            this.monthCalendarNgayOnLai.TabIndex = 19;
-            this.monthCalendarNgayOnLai.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarNgayOnLai_DateChanged);
+            this.dtpkSetTgOn.Location = new System.Drawing.Point(19, 407);
+            this.dtpkSetTgOn.Name = "dtpkSetTgOn";
+            this.dtpkSetTgOn.TabIndex = 19;
+            this.dtpkSetTgOn.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.dtpkSetTgOn_DateChanged);
             // 
             // btnTuChuaCoLichOn
             // 
@@ -380,22 +365,34 @@
             this.btnTuChuaCoLichOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
             this.btnTuChuaCoLichOn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnTuChuaCoLichOn.Image = ((System.Drawing.Image)(resources.GetObject("btnTuChuaCoLichOn.Image")));
-            this.btnTuChuaCoLichOn.Location = new System.Drawing.Point(312, 335);
+            this.btnTuChuaCoLichOn.Location = new System.Drawing.Point(19, 335);
             this.btnTuChuaCoLichOn.Name = "btnTuChuaCoLichOn";
-            this.btnTuChuaCoLichOn.Size = new System.Drawing.Size(164, 41);
+            this.btnTuChuaCoLichOn.Size = new System.Drawing.Size(262, 41);
             this.btnTuChuaCoLichOn.TabIndex = 20;
-            this.btnTuChuaCoLichOn.Text = "Từ có lịch ôn";
+            this.btnTuChuaCoLichOn.Text = "Từ chưa có lịch ôn";
             this.btnTuChuaCoLichOn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTuChuaCoLichOn.UseVisualStyleBackColor = false;
             this.btnTuChuaCoLichOn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // cbHienAmThanhTuongTu
+            // 
+            this.cbHienAmThanhTuongTu.AutoSize = true;
+            this.cbHienAmThanhTuongTu.Location = new System.Drawing.Point(174, 643);
+            this.cbHienAmThanhTuongTu.Name = "cbHienAmThanhTuongTu";
+            this.cbHienAmThanhTuongTu.Size = new System.Drawing.Size(108, 21);
+            this.cbHienAmThanhTuongTu.TabIndex = 13;
+            this.cbHienAmThanhTuongTu.Text = "Hiện ATTT";
+            this.cbHienAmThanhTuongTu.UseVisualStyleBackColor = true;
+            this.cbHienAmThanhTuongTu.CheckedChanged += new System.EventHandler(this.cbHienAmThanhTuongTu_CheckedChanged);
             // 
             // NhomTu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1150, 769);
+            this.ClientSize = new System.Drawing.Size(1160, 783);
+            this.Controls.Add(this.cbHienAmThanhTuongTu);
             this.Controls.Add(this.btnTuChuaCoLichOn);
-            this.Controls.Add(this.monthCalendarNgayOnLai);
+            this.Controls.Add(this.dtpkSetTgOn);
             this.Controls.Add(this.tbnTimTheoNgay);
             this.Controls.Add(this.pnFlashCard);
             this.Controls.Add(this.label3);
@@ -403,7 +400,7 @@
             this.Controls.Add(this.btnAllTu);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numIndexWord);
-            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.dtpkDsTuOn);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "NhomTu";
@@ -429,11 +426,10 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnForget;
         private System.Windows.Forms.Button btnRemembed;
-        private System.Windows.Forms.Button btnFlip;
         private System.Windows.Forms.Label lbMean;
         private System.Windows.Forms.Label lbIPA;
         private System.Windows.Forms.Label lbPathOfSpeech;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.MonthCalendar dtpkDsTuOn;
         private System.Windows.Forms.Panel pnFront;
         private System.Windows.Forms.Panel pnBack;
         private System.Windows.Forms.NumericUpDown numIndexWord;
@@ -447,7 +443,8 @@
         private System.Windows.Forms.Label lbTuTongSo;
         private System.Windows.Forms.Label lbATTT;
         private System.Windows.Forms.Button tbnTimTheoNgay;
-        private System.Windows.Forms.MonthCalendar monthCalendarNgayOnLai;
+        private System.Windows.Forms.MonthCalendar dtpkSetTgOn;
         private System.Windows.Forms.Button btnTuChuaCoLichOn;
+        private System.Windows.Forms.CheckBox cbHienAmThanhTuongTu;
     }
 }

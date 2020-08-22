@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace FlashCard.View
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string csvHeader = "tagName,mean,StartTime,Step,ATTT,IPA,pathOfSpeech,Example";
+            string csvHeader = "tagName,mean,StartTime,ATTT,IPA,pathOfSpeech,Example";
             string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", txtGroupName.Text + ".xlsx");
             try
             {
@@ -43,10 +44,9 @@ namespace FlashCard.View
                     ws.Cells[1, 2] = "mean";
                     ws.Cells[1, 3] = "StartTime";
                     ws.Cells[1, 4] = "Step";
-                    ws.Cells[1, 5] = "ATTT";
-                    ws.Cells[1, 6] = "IPA";
-                    ws.Cells[1, 7] = "pathOfSpeech";
-                    ws.Cells[1, 8] = "Example";
+                    ws.Cells[1, 5] = "IPA";
+                    ws.Cells[1, 6] = "pathOfSpeech";
+                    ws.Cells[1, 7] = "Example";
                     wb.SaveAs(filePath, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
                     wb.Close();
                     app.Quit();
@@ -66,7 +66,7 @@ namespace FlashCard.View
                     btnNewGroup.Font = new System.Drawing.Font("Arial", 15, FontStyle.Bold);
                     btnNewGroup.ImageAlign = ContentAlignment.MiddleLeft;
                     btnNewGroup.TextImageRelation = TextImageRelation.ImageBeforeText;
-                    btnNewGroup.Image = Image.FromFile(@"C:\Users\admin\Desktop\PhanMemFLashCard\FlashCard\Picture\words.png");
+                    btnNewGroup.Image = Image.FromFile(@"..\..\Picture\words.png");
 
                     #endregion
                     btnNewGroup.Enabled = false;
@@ -93,6 +93,7 @@ namespace FlashCard.View
                         }
                     }
                 }
+                Process.Start(Path.Combine(Environment.CurrentDirectory, @"..\..\Data\"));
 
             }
             catch (IOException ex)
@@ -103,5 +104,9 @@ namespace FlashCard.View
 
         }
 
+        private void ChuDe_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

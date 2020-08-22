@@ -60,7 +60,15 @@ namespace FlashCard.View
         {
             try
             {
-
+                if (cbHienAmThanhTuongTu.Checked)
+                {
+                    lbATTT.Visible = true;
+                }
+                else
+                {
+                    lbATTT.Visible = false;
+                }
+              
                 currentWord = lstCurrentWords[indexWord];
                 lbTagName.Text = currentWord.tagName;
                 lbPathOfSpeech.Text = currentWord.pathOfSpeech;
@@ -68,7 +76,6 @@ namespace FlashCard.View
                 lbMean.Text = currentWord.mean;
                 lbExample.Text = currentWord.Example;
                 lbATTT.Text = currentWord.ATTT;
-                currentWord.startTime = DateTime.Now;
                 if (currentWord.Status == Status.forget)
                 {
                     pnBack.BackColor = Color.FromArgb(211, 59, 2);
@@ -85,8 +92,8 @@ namespace FlashCard.View
                     pnFront.BackColor = Color.Gray;
                 }
                 numIndexWord.Value = indexWord;
-                monthCalendarNgayOnLai.SetDate(lstCurrentWords[currentIndexWord].Step);
                 lbTuTongSo.Text = numIndexWord.Value + "/" + (lstCurrentWords.Count() - 1);
+                dtpkSetTgOn.SetDate(currentWord.startTime);
             }
             catch
             {
@@ -123,7 +130,6 @@ namespace FlashCard.View
             btnTuChuaThuoc.Enabled = false;
             btnPre.Enabled = false;
             btnNext.Enabled = false;
-            btnFlip.Enabled = false;
             btnForget.Enabled = false;
             btnRemembed.Enabled = false;
 
@@ -150,16 +156,14 @@ namespace FlashCard.View
                         word.tagName = dr[0].ToString();
                         word.mean = dr[1].ToString();
                         word.startTime = Convert.ToDateTime(dr[2].ToString());
-                        word.Step = Convert.ToDateTime(dr[3].ToString());
-                        word.ATTT = dr[4].ToString();
-                        word.IPA = dr[5].ToString();
-                        word.pathOfSpeech = dr[6].ToString();
-                        word.Example = dr[7].ToString();
+                        word.ATTT = dr[3].ToString();
+                        word.IPA = dr[4].ToString();
+                        word.pathOfSpeech = dr[5].ToString();
+                        word.Example = dr[6].ToString();
                         word.Status = Status.willRecall;
 
                         lstAllWords.Add(word);
-
-                        if (word.Step < DateTime.Now)
+                        if (word.startTime<=DateTime.Now)
                         {
                             lstTuChuaCoLichOn.Add(word);
                         }
@@ -189,15 +193,6 @@ namespace FlashCard.View
             currentIndexWord++;
             currentWord = lstCurrentWords[currentIndexWord];
             HienThe(currentIndexWord);
-            monthCalendarNgayOnLai.SetDate(currentWord.Step);
-            try
-            {
-                currentWord.Step = monthCalendarNgayOnLai.SelectionRange.Start;
-            }
-            catch
-            {
-
-            }
             ButtonShowOrNot();
         }
 
@@ -221,16 +216,6 @@ namespace FlashCard.View
             currentIndexWord--;
             currentWord = lstCurrentWords[currentIndexWord];
             HienThe(currentIndexWord);
-            monthCalendarNgayOnLai.SetDate(currentWord.Step);
-
-            try
-            {
-                currentWord.Step = monthCalendarNgayOnLai.SelectionRange.Start;
-            }
-            catch
-            {
-
-            }
             ButtonShowOrNot();
         }
 
@@ -277,8 +262,6 @@ namespace FlashCard.View
                 currentIndexWord = Convert.ToInt32(numIndexWord.Value);
                 currentWord = lstCurrentWords[currentIndexWord];
                 HienThe(currentIndexWord);
-                monthCalendarNgayOnLai.SetDate(currentWord.Step);
-
             }
             catch
             {
@@ -286,19 +269,6 @@ namespace FlashCard.View
             }
 
 
-        }
-
-        private void numDaysRecall_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                monthCalendarNgayOnLai.SetDate(currentWord.Step);
-
-                currentWord.startTime = DateTime.Now;
-            }
-            catch
-            {
-            }
         }
 
         private void btnTuDaThuoc_Click(object sender, EventArgs e)
@@ -386,7 +356,6 @@ namespace FlashCard.View
             btnTuChuaThuoc.Enabled = true;
             btnPre.Enabled = true;
             btnNext.Enabled = true;
-            btnFlip.Enabled = true;
             btnForget.Enabled = true;
             btnRemembed.Enabled = true;
 
@@ -435,22 +404,20 @@ namespace FlashCard.View
             ws.Cells[1, 1] = "tagName";
             ws.Cells[1, 2] = "mean";
             ws.Cells[1, 3] = "StartTime";
-            ws.Cells[1, 4] = "Step";
-            ws.Cells[1, 5] = "ATTT";
-            ws.Cells[1, 6] = "IPA";
-            ws.Cells[1, 7] = "pathOfSpeech";
-            ws.Cells[1, 8] = "Example";
+            ws.Cells[1, 4] = "ATTT";
+            ws.Cells[1, 5] = "IPA";
+            ws.Cells[1, 6] = "pathOfSpeech";
+            ws.Cells[1, 7] = "Example";
             int i = 2;
             foreach (Word item in lstAllWords)
             {
                 ws.Cells[i, 1] = item.tagName;
                 ws.Cells[i, 2] = item.mean;
                 ws.Cells[i, 3] = item.startTime;
-                ws.Cells[i, 4] = item.Step;
-                ws.Cells[i, 5] = item.ATTT;
-                ws.Cells[i, 6] = item.IPA;
-                ws.Cells[i, 7] = item.pathOfSpeech;
-                ws.Cells[i, 8] = item.Example;
+                ws.Cells[i, 4] = item.ATTT;
+                ws.Cells[i, 5] = item.IPA;
+                ws.Cells[i, 6] = item.pathOfSpeech;
+                ws.Cells[i, 7] = item.Example;
                 i++;
             }
             try
@@ -477,7 +444,6 @@ namespace FlashCard.View
             btnTuChuaThuoc.Enabled = true;
             btnPre.Enabled = true;
             btnNext.Enabled = true;
-            btnFlip.Enabled = true;
             btnForget.Enabled = true;
             btnRemembed.Enabled = true;
 
@@ -485,8 +451,8 @@ namespace FlashCard.View
             {
                 w.Status = Status.willRecall;
 
-                DateTime dateTimePicked = monthCalendar1.SelectionStart.Date;
-                if (dateTimePicked == w.Step.Date)
+                DateTime dateTimePicked = dtpkDsTuOn.SelectionStart.Date;
+                if (dateTimePicked == w.startTime)
                 {
                     lstAllWordsByDay.Add(w);
                 }
@@ -501,7 +467,7 @@ namespace FlashCard.View
                 return;
             }
 
-            MessageBox.Show(monthCalendar1.SelectionStart.Date.ToString());
+            MessageBox.Show(dtpkDsTuOn.SelectionStart.Date.ToString());
 
             try
             {
@@ -518,11 +484,6 @@ namespace FlashCard.View
             ButtonShowOrNot();
         }
 
-        private void monthCalendarNgayOnLai_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            currentWord.Step = monthCalendarNgayOnLai.SelectionRange.Start;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (lstTuChuaCoLichOn.Count() > 0)
@@ -534,7 +495,6 @@ namespace FlashCard.View
                 btnTuChuaThuoc.Enabled = true;
                 btnPre.Enabled = true;
                 btnNext.Enabled = true;
-                btnFlip.Enabled = true;
                 btnForget.Enabled = true;
                 btnRemembed.Enabled = true;
 
@@ -552,7 +512,22 @@ namespace FlashCard.View
             }
         }
 
+        private void cbHienAmThanhTuongTu_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbHienAmThanhTuongTu.Checked)
+            {
+                lbATTT.Visible = true;
+            }
+            else
+            {
+                lbATTT.Visible = false;
+            }
+        }
 
+        private void dtpkSetTgOn_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            currentWord.startTime = dtpkSetTgOn.SelectionRange.Start;
+        }
     }
 }
 
