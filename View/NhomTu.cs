@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ExcelDataReader;
+using Microsoft.Office.Interop.Excel;
 
 namespace FlashCard.View
 {
@@ -22,19 +24,11 @@ namespace FlashCard.View
         List<Word> lstWordsRemembed = new List<Word>();
         List<Word> lstWordsRepeat = new List<Word>();
         List<Word> lstAllWords = new List<Word>();
+        List<Word> lstTuChuaCoLichOn = new List<Word>();
 
-
-        List<Word> lstWords0 = new List<Word>();
-        List<Word> lstWords1 = new List<Word>();
-        List<Word> lstWords2 = new List<Word>();
-        List<Word> lstWords3 = new List<Word>();
-        List<Word> lstWords4 = new List<Word>();
-        List<Word> lstWords5 = new List<Word>();
-        List<Word> lstWords6 = new List<Word>();
-        List<Word> lstWords7 = new List<Word>();
 
         List<Word> lstCurrentWords = new List<Word>();
-        Filter filterList;
+        FilterEnum filterList;
 
         Word currentWord = new Word();
         int currentIndexWord = 0;
@@ -43,21 +37,42 @@ namespace FlashCard.View
         public NhomTu()
         {
             InitializeComponent();
+            this.MouseWheel += NhomTu_MouseWheel;
         }
+
+        private void NhomTu_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (side == 1)
+            {
+                pnFront.Visible = false;
+                pnBack.Visible = true;
+                side = 0;
+            }
+            else if (side == 0)
+            {
+                pnFront.Visible = true;
+                pnBack.Visible = false;
+                side = 1;
+            }
+        }
+
         private void HienThe(int indexWord)
         {
             try
             {
+
                 currentWord = lstCurrentWords[indexWord];
                 lbTagName.Text = currentWord.tagName;
                 lbPathOfSpeech.Text = currentWord.pathOfSpeech;
                 lbIPA.Text = currentWord.IPA;
                 lbMean.Text = currentWord.mean;
                 lbExample.Text = currentWord.Example;
+                lbATTT.Text = currentWord.ATTT;
+                currentWord.startTime = DateTime.Now;
                 if (currentWord.Status == Status.forget)
                 {
-                    pnBack.BackColor = Color.Yellow;
-                    pnFront.BackColor = Color.Yellow;
+                    pnBack.BackColor = Color.FromArgb(211, 59, 2);
+                    pnFront.BackColor = Color.FromArgb(211, 59, 2);
                 }
                 else if (currentWord.Status == Status.remember)
                 {
@@ -70,7 +85,8 @@ namespace FlashCard.View
                     pnFront.BackColor = Color.Gray;
                 }
                 numIndexWord.Value = indexWord;
-                numDaysRecall.Value = lstCurrentWords[currentIndexWord].Step;
+                monthCalendarNgayOnLai.SetDate(lstCurrentWords[currentIndexWord].Step);
+                lbTuTongSo.Text = numIndexWord.Value + "/" + (lstCurrentWords.Count() - 1);
             }
             catch
             {
@@ -102,6 +118,7 @@ namespace FlashCard.View
         }
         private void NhomTu_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             btnListTuDaThuoc.Enabled = false;
             btnTuChuaThuoc.Enabled = false;
             btnPre.Enabled = false;
@@ -112,86 +129,47 @@ namespace FlashCard.View
 
             pnFlashCard.Visible = false;
 
-            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".csv");
-            string[] lines = File.ReadAllLines(filePath);
 
-            for (int i = 1; i < lines.Length; i++)
+            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
+
+            System.Data.DataTable dtTable;
+            using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
             {
-                string[] words = lines[i].Split(',');
-
-                Word word = new Word()
+                using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
                 {
-                    tagName = words[0],
-                    mean = words[1],
-                    startTime = Convert.ToDateTime(words[2]),
-                    Step = Convert.ToInt32(words[3]),
-                    ATTT = words[4],
-                    IPA = words[5],
-                    pathOfSpeech = words[6],
-                    Example = words[7],
-                    Status = Status.willRecall
-                };
+                    DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                    {
+                        ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
+                    });
+                    dtTable = result.Tables[0];
 
-                lstAllWords.Add(word);
+                    foreach (DataRow dr in dtTable.Rows)
+                    {
+
+                        Word word = new Word();
+                        word.tagName = dr[0].ToString();
+                        word.mean = dr[1].ToString();
+                        word.startTime = Convert.ToDateTime(dr[2].ToString());
+                        word.Step = Convert.ToDateTime(dr[3].ToString());
+                        word.ATTT = dr[4].ToString();
+                        word.IPA = dr[5].ToString();
+                        word.pathOfSpeech = dr[6].ToString();
+                        word.Example = dr[7].ToString();
+                        word.Status = Status.willRecall;
+
+                        lstAllWords.Add(word);
+
+                        if (word.Step < DateTime.Now)
+                        {
+                            lstTuChuaCoLichOn.Add(word);
+                        }
+                    }
+                }
             }
-
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-            lstAllWordsByDay.Clear();
-            pnFlashCard.Visible = true;
-            filterList = Filter.ByDay;
-
-            btnListTuDaThuoc.Enabled = true;
-            btnTuChuaThuoc.Enabled = true;
-            btnPre.Enabled = true;
-            btnNext.Enabled = true;
-            btnFlip.Enabled = true;
-            btnForget.Enabled = true;
-            btnRemembed.Enabled = true;
-
-            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".csv");
-            string[] lines = File.ReadAllLines(filePath);
-
-            for (int i = 1; i < lines.Length; i++)
-            {
-                string[] words = lines[i].Split(',');
-
-                Word word = new Word();
-                word.tagName = words[0];
-                word.mean = words[1];
-                word.startTime = Convert.ToDateTime(words[2]);
-                word.Step = Convert.ToInt32(words[3]);
-                word.ATTT = words[4];
-                word.IPA = words[5];
-                word.pathOfSpeech = words[6];
-                word.Example = words[7];
-                word.Status = Status.willRecall;
-
-                DateTime dateTimePicked = monthCalendar1.SelectionStart.Date;
-                int timeStep = dateTimePicked.Day - word.startTime.Day;
-                if (timeStep % word.Step == 0 && timeStep!=0)
-                {
-                    lstAllWordsByDay.Add(word);
-                }
-            }
-
-            MessageBox.Show(monthCalendar1.SelectionStart.Date.ToString());
-
-            try
-            {
-                lstCurrentWords = lstAllWordsByDay;
-                HienThe(0);
-            }
-            catch { }
-            finally
-            {
-                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
-                numIndexWord.Minimum = 0;
-            }
-
-            ButtonShowOrNot();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -211,11 +189,10 @@ namespace FlashCard.View
             currentIndexWord++;
             currentWord = lstCurrentWords[currentIndexWord];
             HienThe(currentIndexWord);
-            numDaysRecall.Value = currentWord.Step;
-
+            monthCalendarNgayOnLai.SetDate(currentWord.Step);
             try
             {
-                currentWord.Step = Convert.ToInt32(numDaysRecall.Value);
+                currentWord.Step = monthCalendarNgayOnLai.SelectionRange.Start;
             }
             catch
             {
@@ -227,8 +204,8 @@ namespace FlashCard.View
         private void btnForget_Click(object sender, EventArgs e)
         {
             currentWord.Status = Status.forget;
-            pnBack.BackColor = Color.Yellow;
-            pnFront.BackColor = Color.Yellow;
+            pnBack.BackColor = Color.FromArgb(211, 59, 2);
+            pnFront.BackColor = Color.FromArgb(211, 59, 2);
 
         }
 
@@ -244,18 +221,17 @@ namespace FlashCard.View
             currentIndexWord--;
             currentWord = lstCurrentWords[currentIndexWord];
             HienThe(currentIndexWord);
-            numDaysRecall.Value = currentWord.Step;
+            monthCalendarNgayOnLai.SetDate(currentWord.Step);
 
             try
             {
-                currentWord.Step = Convert.ToInt32(numDaysRecall.Value);
+                currentWord.Step = monthCalendarNgayOnLai.SelectionRange.Start;
             }
             catch
             {
 
             }
             ButtonShowOrNot();
-
         }
 
         private void btnFlip_Click(object sender, EventArgs e)
@@ -272,7 +248,6 @@ namespace FlashCard.View
                 pnBack.Visible = false;
                 side = 1;
             }
-
         }
 
         private void lbPathOfSpeech_Click(object sender, EventArgs e)
@@ -302,7 +277,8 @@ namespace FlashCard.View
                 currentIndexWord = Convert.ToInt32(numIndexWord.Value);
                 currentWord = lstCurrentWords[currentIndexWord];
                 HienThe(currentIndexWord);
-                numDaysRecall.Value = currentWord.Step;
+                monthCalendarNgayOnLai.SetDate(currentWord.Step);
+
             }
             catch
             {
@@ -316,23 +292,23 @@ namespace FlashCard.View
         {
             try
             {
-                currentWord.Step = Convert.ToInt32(numDaysRecall.Value);
+                monthCalendarNgayOnLai.SetDate(currentWord.Step);
+
+                currentWord.startTime = DateTime.Now;
             }
             catch
             {
-
             }
-
         }
 
         private void btnTuDaThuoc_Click(object sender, EventArgs e)
         {
 
-            if (filterList == Filter.AllList)
+            if (filterList == FilterEnum.AllList)
             {
                 lstCurrentWords = lstAllWords;
             }
-            else if (filterList == Filter.ByDay)
+            else if (filterList == FilterEnum.ByDay)
             {
                 lstCurrentWords = lstAllWordsByDay;
 
@@ -361,11 +337,11 @@ namespace FlashCard.View
 
         private void btnTuChuaThuoc_Click(object sender, EventArgs e)
         {
-            if (filterList == Filter.AllList)
+            if (filterList == FilterEnum.AllList)
             {
                 lstCurrentWords = lstAllWords;
             }
-            else if (filterList == Filter.ByDay)
+            else if (filterList == FilterEnum.ByDay)
             {
                 lstCurrentWords = lstAllWordsByDay;
             }
@@ -403,7 +379,7 @@ namespace FlashCard.View
 
         private void btnAllTu_Click_1(object sender, EventArgs e)
         {
-            filterList = Filter.AllList;
+            filterList = FilterEnum.AllList;
             pnFlashCard.Visible = true;
 
             btnListTuDaThuoc.Enabled = true;
@@ -414,7 +390,7 @@ namespace FlashCard.View
             btnForget.Enabled = true;
             btnRemembed.Enabled = true;
 
-           
+
             lstCurrentWords = lstAllWords;
             currentWord = lstCurrentWords[0];
             currentIndexWord = 0;
@@ -450,22 +426,133 @@ namespace FlashCard.View
 
         private void NhomTu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string csvHeader = "tagName,mean,StartTime,Step,ATTT,IPA,pathOfSpeech,Example";
-            foreach(Word word in lstAllWords)
+            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
+
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            Workbook wb = app.Workbooks.Add(XlSheetType.xlWorksheet);
+            Worksheet ws = (Worksheet)app.ActiveSheet;
+            app.Visible = false;
+            ws.Cells[1, 1] = "tagName";
+            ws.Cells[1, 2] = "mean";
+            ws.Cells[1, 3] = "StartTime";
+            ws.Cells[1, 4] = "Step";
+            ws.Cells[1, 5] = "ATTT";
+            ws.Cells[1, 6] = "IPA";
+            ws.Cells[1, 7] = "pathOfSpeech";
+            ws.Cells[1, 8] = "Example";
+            int i = 2;
+            foreach (Word item in lstAllWords)
             {
-                csvHeader += $"\n {word.tagName},{word.mean},{DateTime.Now},{word.Step},{word.ATTT},{word.IPA},{word.pathOfSpeech},{word.Example}";
+                ws.Cells[i, 1] = item.tagName;
+                ws.Cells[i, 2] = item.mean;
+                ws.Cells[i, 3] = item.startTime;
+                ws.Cells[i, 4] = item.Step;
+                ws.Cells[i, 5] = item.ATTT;
+                ws.Cells[i, 6] = item.IPA;
+                ws.Cells[i, 7] = item.pathOfSpeech;
+                ws.Cells[i, 8] = item.Example;
+                i++;
             }
-            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text+ ".csv");
             try
             {
-                    File.WriteAllText(filePath, csvHeader);
-                    MessageBox.Show("Ban nho doi lai lich on tu");
+                wb.SaveAs(filePath, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
             }
-            catch (IOException ex)
+            catch { }
+            finally
             {
-                MessageBox.Show(ex.Message);
+                wb.Close();
+                app.Quit();
+            }
+
+
+        }
+
+        private void tbnTimTheoNgay_Click(object sender, EventArgs e)
+        {
+            lstAllWordsByDay.Clear();
+            pnFlashCard.Visible = true;
+            filterList = FilterEnum.ByDay;
+
+            btnListTuDaThuoc.Enabled = true;
+            btnTuChuaThuoc.Enabled = true;
+            btnPre.Enabled = true;
+            btnNext.Enabled = true;
+            btnFlip.Enabled = true;
+            btnForget.Enabled = true;
+            btnRemembed.Enabled = true;
+
+            foreach (Word w in lstAllWords)
+            {
+                w.Status = Status.willRecall;
+
+                DateTime dateTimePicked = monthCalendar1.SelectionStart.Date;
+                if (dateTimePicked == w.Step.Date)
+                {
+                    lstAllWordsByDay.Add(w);
+                }
+            }
+
+
+            if (lstAllWordsByDay.Count() == 0)
+            {
+
+                pnFlashCard.Visible = false;
+                MessageBox.Show("Ngày này không có lịch ôn");
+                return;
+            }
+
+            MessageBox.Show(monthCalendar1.SelectionStart.Date.ToString());
+
+            try
+            {
+                lstCurrentWords = lstAllWordsByDay;
+                HienThe(0);
+            }
+            catch { }
+            finally
+            {
+                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+                numIndexWord.Minimum = 0;
+            }
+
+            ButtonShowOrNot();
+        }
+
+        private void monthCalendarNgayOnLai_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            currentWord.Step = monthCalendarNgayOnLai.SelectionRange.Start;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (lstTuChuaCoLichOn.Count() > 0)
+            {
+                filterList = FilterEnum.LichOnTrongQuaKhu;
+                pnFlashCard.Visible = true;
+
+                btnListTuDaThuoc.Enabled = true;
+                btnTuChuaThuoc.Enabled = true;
+                btnPre.Enabled = true;
+                btnNext.Enabled = true;
+                btnFlip.Enabled = true;
+                btnForget.Enabled = true;
+                btnRemembed.Enabled = true;
+
+
+                lstCurrentWords = lstTuChuaCoLichOn;
+                currentWord = lstCurrentWords[0];
+                currentIndexWord = 0;
+                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+                HienThe(currentIndexWord);
+                ButtonShowOrNot();
+            }
+            else
+            {
+                MessageBox.Show("Không có từ nào có lịch ôn trong quá khứ");
             }
         }
+
+
     }
 }
 

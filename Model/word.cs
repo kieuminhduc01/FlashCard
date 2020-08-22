@@ -13,7 +13,7 @@ namespace FlashCard.Model
         public string tagName { get; set; }
         public string mean { get; set; }
         public DateTime startTime { get; set; }
-        public int Step { get; set; }
+        public DateTime Step { get; set; }
         public string ATTT { get; set; }
         public string IPA { get; set; }
         public string pathOfSpeech { get; set; }
