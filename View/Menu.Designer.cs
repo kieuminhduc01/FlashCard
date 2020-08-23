@@ -36,6 +36,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.pnShow = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnMoThuMucData = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -62,6 +63,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.btnMoThuMucData);
             this.panel1.Controls.Add(this.btnNewGroup);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(275, 0);
@@ -122,6 +124,23 @@
             this.pnShow.Size = new System.Drawing.Size(275, 790);
             this.pnShow.TabIndex = 3;
             // 
+            // btnMoThuMucData
+            // 
+            this.btnMoThuMucData.BackColor = System.Drawing.Color.White;
+            this.btnMoThuMucData.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMoThuMucData.FlatAppearance.BorderSize = 0;
+            this.btnMoThuMucData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoThuMucData.Font = new System.Drawing.Font("Microsoft YaHei", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMoThuMucData.Image = ((System.Drawing.Image)(resources.GetObject("btnMoThuMucData.Image")));
+            this.btnMoThuMucData.Location = new System.Drawing.Point(193, 0);
+            this.btnMoThuMucData.Name = "btnMoThuMucData";
+            this.btnMoThuMucData.Size = new System.Drawing.Size(193, 59);
+            this.btnMoThuMucData.TabIndex = 1;
+            this.btnMoThuMucData.Text = "Data";
+            this.btnMoThuMucData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnMoThuMucData.UseVisualStyleBackColor = false;
+            this.btnMoThuMucData.Click += new System.EventHandler(this.btnMoThuMucData_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -150,5 +169,6 @@
         private System.Windows.Forms.Button btnNewGroup;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMoThuMucData;
     }
 }

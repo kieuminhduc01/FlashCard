@@ -131,5 +131,10 @@ namespace FlashCard.View
                 e.Cancel = true;
             }
         }
+
+        private void btnMoThuMucData_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, @"..\..\Data\"));
+        }
     }
 }

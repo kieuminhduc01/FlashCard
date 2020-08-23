@@ -118,6 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnMoThuMucData.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAFWSURBVGhD7ZkxSgQxFIaD6EISr+ARLCy8gScQbBctFBstZZKsEPEU22hjodM4SUoLEcQLeIQ9
+        gPZbaCKvMiGOyLJv8H3wdXnD/0MShhlGEMQ/RbhmS3r9JIJ+F15/VJwLp2cyqIZZuwLjOOCd2ehRINeZ
+        S3gEDoQ3F8WgPzuX3fkmPGb5xC31WgjZ1zcR1MMijfnuuNcnrLUjiFwmLp4VAmL0mT3aVYidM6Ai8Vyq
+        Q4idM6gi3lxB7JwhFZFBtxA7Z91NduW9OfuzXu/LbrKzWBHdkkQfhG+2uTN7mE0ZIW6Z+N50UDpYGI2H
+        fQyxc6RXt6UhjKasEDsnXWmlIYxWr18qsgSpCDapCDapCDapCDapCDapCDapCDapCDarReKC6+8DeK1+
+        MjXH5SGE1j5is+nRWlz0kg3hs/5b4YvWjngwp9ypm7QPMZky9frRQxAEQRC/grFPDccP+Xpu34kAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
   <data name="btnNewGroup.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAA99JREFUaEPt

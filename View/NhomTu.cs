@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ExcelDataReader;
 using Microsoft.Office.Interop.Excel;
+using FlashCard.Controller;
 
 namespace FlashCard.View
 {
@@ -68,7 +69,7 @@ namespace FlashCard.View
                 {
                     lbATTT.Visible = false;
                 }
-              
+
                 currentWord = lstCurrentWords[indexWord];
                 lbTagName.Text = currentWord.tagName;
                 lbPathOfSpeech.Text = currentWord.pathOfSpeech;
@@ -163,7 +164,7 @@ namespace FlashCard.View
                         word.Status = Status.willRecall;
 
                         lstAllWords.Add(word);
-                        if (word.startTime<=DateTime.Now)
+                        if (word.startTime <= DateTime.Now)
                         {
                             lstTuChuaCoLichOn.Add(word);
                         }
@@ -397,38 +398,39 @@ namespace FlashCard.View
         {
             string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
 
-            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
-            Workbook wb = app.Workbooks.Add(XlSheetType.xlWorksheet);
-            Worksheet ws = (Worksheet)app.ActiveSheet;
-            app.Visible = false;
-            ws.Cells[1, 1] = "tagName";
-            ws.Cells[1, 2] = "mean";
-            ws.Cells[1, 3] = "StartTime";
-            ws.Cells[1, 4] = "ATTT";
-            ws.Cells[1, 5] = "IPA";
-            ws.Cells[1, 6] = "pathOfSpeech";
-            ws.Cells[1, 7] = "Example";
+            Excel excel = new Excel(filePath, 1);
+
+            excel.WriteToCell(1, 1, "tagName");
+            excel.WriteToCell(1, 2, "mean");
+            excel.WriteToCell(1, 3, "StartTime");
+            excel.WriteToCell(1, 4, "Step");
+            excel.WriteToCell(1, 5, "IPA");
+            excel.WriteToCell(1, 6, "pathOfSpeech");
+            excel.WriteToCell(1, 7, "Example");
             int i = 2;
             foreach (Word item in lstAllWords)
             {
-                ws.Cells[i, 1] = item.tagName;
-                ws.Cells[i, 2] = item.mean;
-                ws.Cells[i, 3] = item.startTime;
-                ws.Cells[i, 4] = item.ATTT;
-                ws.Cells[i, 5] = item.IPA;
-                ws.Cells[i, 6] = item.pathOfSpeech;
-                ws.Cells[i, 7] = item.Example;
+
+                excel.WriteToCell(i, 1, item.tagName);
+                excel.WriteToCell(i, 2, item.mean);
+                excel.WriteToCell(i, 3, item.startTime.ToString());
+                excel.WriteToCell(i, 4, item.ATTT);
+                excel.WriteToCell(i, 5, item.IPA);
+                excel.WriteToCell(i, 6, item.pathOfSpeech);
+                excel.WriteToCell(i, 7, item.Example);
+
                 i++;
             }
             try
             {
-                wb.SaveAs(filePath, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                excel.Save();
             }
-            catch { }
+            catch {
+                MessageBox.Show("Lỗi khi lưu file");
+            }
             finally
             {
-                wb.Close();
-                app.Quit();
+                excel.Close();
             }
 
 
