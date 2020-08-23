@@ -49,7 +49,7 @@ namespace FlashCard.View
                     excel.WriteToCell(1, 1, "tagName");
                     excel.WriteToCell(1, 2, "mean");
                     excel.WriteToCell(1, 3, "StartTime");
-                    excel.WriteToCell(1, 4, "Step");
+                    excel.WriteToCell(1, 4, "ATTT");
                     excel.WriteToCell(1, 5, "IPA");
                     excel.WriteToCell(1, 6, "pathOfSpeech");
                     excel.WriteToCell(1, 7, "Example");

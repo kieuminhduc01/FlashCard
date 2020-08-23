@@ -30,22 +30,22 @@ namespace FlashCard.Controller
             this.wb = excel.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
         }
 
-        public string ReadCell(int i, int j)
+        public string ReadCell(int row, int column)
         {
            
-            if (ws.Cells[i, j].Value2 != null)
+            if (ws.Cells[row, column].Value2 != null)
             {
-                return ws.Cells[i, j].Value2;
+                return ws.Cells[row, column].Value2+"";
             }
             else
             {
                 return "";
             }
         }
-        public void WriteToCell(int i,int j,string noiDungCuaCell)
+        public void WriteToCell(int row,int column,string noiDungCuaCell)
         {
             
-            ws.Cells[i, j].Value2 = noiDungCuaCell;
+            ws.Cells[row, column].Value2 = noiDungCuaCell;
 
         }
         public void Save()
@@ -61,5 +61,7 @@ namespace FlashCard.Controller
         {
             wb.Close();
         }
+
+       
     }
 }

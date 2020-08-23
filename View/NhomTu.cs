@@ -139,28 +139,24 @@ namespace FlashCard.View
 
             string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
 
-            System.Data.DataTable dtTable;
-            using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+           
+            Excel excel = new Excel(filePath, 1);
+            try
             {
-                using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
+                if (excel.ReadCell(2, 1) != "")
                 {
-                    DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                    int row = 2;
+                    do
                     {
-                        ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
-                    });
-                    dtTable = result.Tables[0];
-
-                    foreach (DataRow dr in dtTable.Rows)
-                    {
-
+                        
                         Word word = new Word();
-                        word.tagName = dr[0].ToString();
-                        word.mean = dr[1].ToString();
-                        word.startTime = Convert.ToDateTime(dr[2].ToString());
-                        word.ATTT = dr[3].ToString();
-                        word.IPA = dr[4].ToString();
-                        word.pathOfSpeech = dr[5].ToString();
-                        word.Example = dr[6].ToString();
+                        word.tagName = excel.ReadCell(row, 1);
+                        word.mean = excel.ReadCell(row, 2);
+                        word.startTime = DateTime.FromOADate(double.Parse(excel.ReadCell(row, 3)));
+                        word.ATTT = excel.ReadCell(row, 4);
+                        word.IPA = excel.ReadCell(row, 5);
+                        word.pathOfSpeech = excel.ReadCell(row, 6);
+                        word.Example = excel.ReadCell(row, 7);
                         word.Status = Status.willRecall;
 
                         lstAllWords.Add(word);
@@ -168,9 +164,17 @@ namespace FlashCard.View
                         {
                             lstTuChuaCoLichOn.Add(word);
                         }
-                    }
+                        row++;
+                    } while (excel.ReadCell(row, 1) != "");
                 }
             }
+            catch (Exception ex){ }
+            finally
+            {
+                excel.Close();
+            }
+
+
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -403,7 +407,7 @@ namespace FlashCard.View
             excel.WriteToCell(1, 1, "tagName");
             excel.WriteToCell(1, 2, "mean");
             excel.WriteToCell(1, 3, "StartTime");
-            excel.WriteToCell(1, 4, "Step");
+            excel.WriteToCell(1, 4, "ATTT");
             excel.WriteToCell(1, 5, "IPA");
             excel.WriteToCell(1, 6, "pathOfSpeech");
             excel.WriteToCell(1, 7, "Example");
@@ -425,7 +429,8 @@ namespace FlashCard.View
             {
                 excel.Save();
             }
-            catch {
+            catch
+            {
                 MessageBox.Show("Lỗi khi lưu file");
             }
             finally
