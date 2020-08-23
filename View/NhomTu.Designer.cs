@@ -56,6 +56,7 @@
             this.dtpkSetTgOn = new System.Windows.Forms.MonthCalendar();
             this.btnTuChuaCoLichOn = new System.Windows.Forms.Button();
             this.cbHienAmThanhTuongTu = new System.Windows.Forms.CheckBox();
+            this.btnSave = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.pnBack.SuspendLayout();
             this.pnFront.SuspendLayout();
@@ -331,7 +332,7 @@
             this.pnFlashCard.Controls.Add(this.btnPre);
             this.pnFlashCard.Controls.Add(this.btnTuChuaThuoc);
             this.pnFlashCard.Controls.Add(this.btnListTuDaThuoc);
-            this.pnFlashCard.Location = new System.Drawing.Point(512, 34);
+            this.pnFlashCard.Location = new System.Drawing.Point(417, 27);
             this.pnFlashCard.Name = "pnFlashCard";
             this.pnFlashCard.Size = new System.Drawing.Size(585, 744);
             this.pnFlashCard.TabIndex = 16;
@@ -385,11 +386,27 @@
             this.cbHienAmThanhTuongTu.UseVisualStyleBackColor = true;
             this.cbHienAmThanhTuongTu.CheckedChanged += new System.EventHandler(this.cbHienAmThanhTuongTu_CheckedChanged);
             // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.btnSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Location = new System.Drawing.Point(19, 634);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(124, 41);
+            this.btnSave.TabIndex = 21;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // NhomTu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 783);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cbHienAmThanhTuongTu);
             this.Controls.Add(this.btnTuChuaCoLichOn);
             this.Controls.Add(this.dtpkSetTgOn);
@@ -446,5 +463,6 @@
         private System.Windows.Forms.MonthCalendar dtpkSetTgOn;
         private System.Windows.Forms.Button btnTuChuaCoLichOn;
         private System.Windows.Forms.CheckBox cbHienAmThanhTuongTu;
+        private System.Windows.Forms.Button btnSave;
     }
 }

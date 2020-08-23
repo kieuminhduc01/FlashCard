@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Controller\Card.cs" />
     <Compile Include="Controller\Excel.cs" />
+    <Compile Include="Controller\FileEvent.cs" />
     <Compile Include="Model\Enum\FilterEnum.cs" />
     <Compile Include="Model\Enum\PathOfSpeech.cs" />
     <Compile Include="Model\Enum\Status.cs" />

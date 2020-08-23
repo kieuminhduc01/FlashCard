@@ -32,11 +32,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pnMain = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMoThuMucData = new System.Windows.Forms.Button();
             this.btnNewGroup = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.pnShow = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnMoThuMucData = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -70,6 +70,23 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1266, 59);
             this.panel1.TabIndex = 4;
+            // 
+            // btnMoThuMucData
+            // 
+            this.btnMoThuMucData.BackColor = System.Drawing.Color.White;
+            this.btnMoThuMucData.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnMoThuMucData.FlatAppearance.BorderSize = 0;
+            this.btnMoThuMucData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoThuMucData.Font = new System.Drawing.Font("Microsoft YaHei", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMoThuMucData.Image = ((System.Drawing.Image)(resources.GetObject("btnMoThuMucData.Image")));
+            this.btnMoThuMucData.Location = new System.Drawing.Point(193, 0);
+            this.btnMoThuMucData.Name = "btnMoThuMucData";
+            this.btnMoThuMucData.Size = new System.Drawing.Size(193, 59);
+            this.btnMoThuMucData.TabIndex = 1;
+            this.btnMoThuMucData.Text = "Data";
+            this.btnMoThuMucData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnMoThuMucData.UseVisualStyleBackColor = false;
+            this.btnMoThuMucData.Click += new System.EventHandler(this.btnMoThuMucData_Click);
             // 
             // btnNewGroup
             // 
@@ -123,23 +140,6 @@
             this.pnShow.Name = "pnShow";
             this.pnShow.Size = new System.Drawing.Size(275, 790);
             this.pnShow.TabIndex = 3;
-            // 
-            // btnMoThuMucData
-            // 
-            this.btnMoThuMucData.BackColor = System.Drawing.Color.White;
-            this.btnMoThuMucData.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMoThuMucData.FlatAppearance.BorderSize = 0;
-            this.btnMoThuMucData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMoThuMucData.Font = new System.Drawing.Font("Microsoft YaHei", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMoThuMucData.Image = ((System.Drawing.Image)(resources.GetObject("btnMoThuMucData.Image")));
-            this.btnMoThuMucData.Location = new System.Drawing.Point(193, 0);
-            this.btnMoThuMucData.Name = "btnMoThuMucData";
-            this.btnMoThuMucData.Size = new System.Drawing.Size(193, 59);
-            this.btnMoThuMucData.TabIndex = 1;
-            this.btnMoThuMucData.Text = "Data";
-            this.btnMoThuMucData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnMoThuMucData.UseVisualStyleBackColor = false;
-            this.btnMoThuMucData.Click += new System.EventHandler(this.btnMoThuMucData_Click);
             // 
             // Menu
             // 

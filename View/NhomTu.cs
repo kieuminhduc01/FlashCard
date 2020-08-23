@@ -139,7 +139,7 @@ namespace FlashCard.View
 
             string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
 
-           
+
             Excel excel = new Excel(filePath, 1);
             try
             {
@@ -148,7 +148,7 @@ namespace FlashCard.View
                     int row = 2;
                     do
                     {
-                        
+
                         Word word = new Word();
                         word.tagName = excel.ReadCell(row, 1);
                         word.mean = excel.ReadCell(row, 2);
@@ -168,7 +168,7 @@ namespace FlashCard.View
                     } while (excel.ReadCell(row, 1) != "");
                 }
             }
-            catch (Exception ex){ }
+            catch (Exception ex) { }
             finally
             {
                 excel.Close();
@@ -354,23 +354,32 @@ namespace FlashCard.View
 
         private void btnAllTu_Click_1(object sender, EventArgs e)
         {
-            filterList = FilterEnum.AllList;
-            pnFlashCard.Visible = true;
+            if (lstCurrentWords.Count > 0)
+            {
+                filterList = FilterEnum.AllList;
+                pnFlashCard.Visible = true;
 
-            btnListTuDaThuoc.Enabled = true;
-            btnTuChuaThuoc.Enabled = true;
-            btnPre.Enabled = true;
-            btnNext.Enabled = true;
-            btnForget.Enabled = true;
-            btnRemembed.Enabled = true;
+                btnListTuDaThuoc.Enabled = true;
+                btnTuChuaThuoc.Enabled = true;
+                btnPre.Enabled = true;
+                btnNext.Enabled = true;
+                btnForget.Enabled = true;
+                btnRemembed.Enabled = true;
 
 
-            lstCurrentWords = lstAllWords;
-            currentWord = lstCurrentWords[0];
-            currentIndexWord = 0;
-            numIndexWord.Maximum = lstCurrentWords.Count() - 1;
-            HienThe(currentIndexWord);
-            ButtonShowOrNot();
+                lstCurrentWords = lstAllWords;
+                currentWord = lstCurrentWords[0];
+                currentIndexWord = 0;
+                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+                HienThe(currentIndexWord);
+                ButtonShowOrNot();
+            }
+            else
+            {
+                MessageBox.Show("Danh sách trống");
+
+            }
+
         }
 
         private void btnHien2Mat_Click(object sender, EventArgs e)
@@ -400,45 +409,14 @@ namespace FlashCard.View
 
         private void NhomTu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
-
-            Excel excel = new Excel(filePath, 1);
-
-            excel.WriteToCell(1, 1, "tagName");
-            excel.WriteToCell(1, 2, "mean");
-            excel.WriteToCell(1, 3, "StartTime");
-            excel.WriteToCell(1, 4, "ATTT");
-            excel.WriteToCell(1, 5, "IPA");
-            excel.WriteToCell(1, 6, "pathOfSpeech");
-            excel.WriteToCell(1, 7, "Example");
-            int i = 2;
-            foreach (Word item in lstAllWords)
+            DialogResult result = MessageBox.Show("Trước khi đóng form bạn nhớ phải lưu thay đổi trước đã?", "chú ý!!!", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
             {
-
-                excel.WriteToCell(i, 1, item.tagName);
-                excel.WriteToCell(i, 2, item.mean);
-                excel.WriteToCell(i, 3, item.startTime.ToString());
-                excel.WriteToCell(i, 4, item.ATTT);
-                excel.WriteToCell(i, 5, item.IPA);
-                excel.WriteToCell(i, 6, item.pathOfSpeech);
-                excel.WriteToCell(i, 7, item.Example);
-
-                i++;
             }
-            try
+            else if (result == DialogResult.Cancel)
             {
-                excel.Save();
+                e.Cancel = true;
             }
-            catch
-            {
-                MessageBox.Show("Lỗi khi lưu file");
-            }
-            finally
-            {
-                excel.Close();
-            }
-
-
         }
 
         private void tbnTimTheoNgay_Click(object sender, EventArgs e)
@@ -534,6 +512,20 @@ namespace FlashCard.View
         private void dtpkSetTgOn_DateChanged(object sender, DateRangeEventArgs e)
         {
             currentWord.startTime = dtpkSetTgOn.SelectionRange.Start;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FileEvent.LuuFileTuVung(this.Text, lstAllWords);
+                MessageBox.Show("Lưu thành công!!");
+            }
+            catch
+            {
+                MessageBox.Show("Lỗi khi lưu");
+            }
+
         }
     }
 }
