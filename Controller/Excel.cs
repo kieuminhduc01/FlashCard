@@ -32,21 +32,36 @@ namespace FlashCard.Controller
 
         public string ReadCell(int row, int column)
         {
-           
-            if (ws.Cells[row, column].Value2 != null)
+            var noiDungCell = ws.Cells[row, column].Value2;
+            if (noiDungCell != null)
             {
-                return ws.Cells[row, column].Value2+"";
+                return noiDungCell+"";
             }
             else
             {
                 return "";
             }
         }
+        public string[,]ReadRange(int startI,int startY,int endI,int endY)
+        {
+            Range range = (Range)ws.Range[ws.Cells[startI, startY], ws.Cells[endI, endY]];
+            object[,] holder = range.Value2;
+            string[,] returnstring = new string[endI - startI, endI - startY];
+            for(int p = 1; p <= endI - startI; p++)
+            {
+                for(int q = 1; q <= endY - startY; q++)
+                {
+                    if (holder[p,q] != null)
+                    {
+                        returnstring[p - 1, q - 1] = holder[p, q].ToString();
+                    }
+                }
+            }
+            return returnstring;
+        }
         public void WriteToCell(int row,int column,string noiDungCuaCell)
         {
-            
             ws.Cells[row, column].Value2 = noiDungCuaCell;
-
         }
         public void Save()
         {

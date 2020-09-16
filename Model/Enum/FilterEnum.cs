@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlashCard.Model.Enum
 {
-    public enum FilterEnum
+    public enum ChiaDanhSach
     {
         AllList,
         ByDay,

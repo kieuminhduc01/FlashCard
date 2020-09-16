@@ -16,6 +16,9 @@ using System.Windows.Forms;
 using ExcelDataReader;
 using Microsoft.Office.Interop.Excel;
 using FlashCard.Controller;
+using System.Threading;
+using System.Diagnostics;
+using Microsoft.VisualBasic;
 
 namespace FlashCard.View
 {
@@ -23,15 +26,12 @@ namespace FlashCard.View
     {
         List<Word> lstAllWordsByDay = new List<Word>();
         List<Word> lstWordsRemembed = new List<Word>();
-        List<Word> lstWordsRepeat = new List<Word>();
-        List<Word> lstAllWords = new List<Word>();
+        List<Word> dsTuOnLai = new List<Word>();
+        List<Word> dsTatCaCacTu = new List<Word>();
         List<Word> lstTuChuaCoLichOn = new List<Word>();
-
-
-        List<Word> lstCurrentWords = new List<Word>();
-        FilterEnum filterList;
-
-        Word currentWord = new Word();
+        List<Word> dsTuHienTai = new List<Word>();
+        ChiaDanhSach loaiDsChiaTu;
+        Word tuHienTai = new Word();
         int currentIndexWord = 0;
         int side = 0;//0 is front,1 is back,2 is both of them
 
@@ -61,6 +61,8 @@ namespace FlashCard.View
         {
             try
             {
+                tuHienTai = dsTuHienTai[indexWord];
+                #region set thành phần hiển thị
                 if (cbHienAmThanhTuongTu.Checked)
                 {
                     lbATTT.Visible = true;
@@ -70,38 +72,39 @@ namespace FlashCard.View
                     lbATTT.Visible = false;
                 }
 
-                currentWord = lstCurrentWords[indexWord];
-                lbTagName.Text = currentWord.tagName;
-                lbPathOfSpeech.Text = currentWord.pathOfSpeech;
-                lbIPA.Text = currentWord.IPA;
-                lbMean.Text = currentWord.mean;
-                lbExample.Text = currentWord.Example;
-                lbATTT.Text = currentWord.ATTT;
-                if (currentWord.Status == Status.forget)
+
+                lbTagName.Text = tuHienTai.tagName;
+                lbPathOfSpeech.Text = tuHienTai.pathOfSpeech;
+                lbIPA.Text = tuHienTai.IPA;
+                lbMean.Text = tuHienTai.mean;
+                lbExample.Text = tuHienTai.Example;
+                lbATTT.Text = tuHienTai.ATTT;
+                if (tuHienTai.Status == Status.forget)
                 {
                     pnBack.BackColor = Color.FromArgb(211, 59, 2);
                     pnFront.BackColor = Color.FromArgb(211, 59, 2);
                 }
-                else if (currentWord.Status == Status.remember)
+                else if (tuHienTai.Status == Status.remember)
                 {
                     pnBack.BackColor = Color.Green;
                     pnFront.BackColor = Color.Green;
                 }
-                if (currentWord.Status == Status.willRecall)
+                if (tuHienTai.Status == Status.willRecall)
                 {
                     pnBack.BackColor = Color.Gray;
                     pnFront.BackColor = Color.Gray;
                 }
+
                 numIndexWord.Value = indexWord;
-                lbTuTongSo.Text = numIndexWord.Value + "/" + (lstCurrentWords.Count() - 1);
-                dtpkSetTgOn.SetDate(currentWord.startTime);
+                lbTuTongSo.Text = numIndexWord.Value + "/" + (dsTuHienTai.Count() - 1);
+                dtpkSetTgOn.SetDate(tuHienTai.startTime);
+                #endregion
             }
             catch
             {
-
             }
         }
-        public void ButtonShowOrNot()
+        public void BatTatNutChuyenThe()
         {
             if (currentIndexWord == 0)//khoa nut quay lai
             {
@@ -113,7 +116,7 @@ namespace FlashCard.View
             }
 
 
-            if ((lstCurrentWords.Count() - 1) == currentIndexWord)//khoa nut di tiep
+            if ((dsTuHienTai.Count() - 1) == currentIndexWord)//khoa nut di tiep
             {
                 btnNext.Enabled = false;
             }
@@ -121,11 +124,10 @@ namespace FlashCard.View
             {
                 btnNext.Enabled = true;
             }
-
-
         }
         private void NhomTu_Load(object sender, EventArgs e)
         {
+            #region set thanh phan hien thi
             this.WindowState = FormWindowState.Maximized;
             btnListTuDaThuoc.Enabled = false;
             btnTuChuaThuoc.Enabled = false;
@@ -133,85 +135,41 @@ namespace FlashCard.View
             btnNext.Enabled = false;
             btnForget.Enabled = false;
             btnRemembed.Enabled = false;
-
             pnFlashCard.Visible = false;
-
-
-            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", this.Text + ".xlsx");
-
-
-            Excel excel = new Excel(filePath, 1);
+            lbProcessing.Location = new System.Drawing.Point(600, 200);
+            lbProcessing.Show();
+            #endregion
             try
             {
-                if (excel.ReadCell(2, 1) != "")
-                {
-                    int row = 2;
-                    do
-                    {
-
-                        Word word = new Word();
-                        word.tagName = excel.ReadCell(row, 1);
-                        word.mean = excel.ReadCell(row, 2);
-                        word.startTime = DateTime.FromOADate(double.Parse(excel.ReadCell(row, 3)));
-                        word.ATTT = excel.ReadCell(row, 4);
-                        word.IPA = excel.ReadCell(row, 5);
-                        word.pathOfSpeech = excel.ReadCell(row, 6);
-                        word.Example = excel.ReadCell(row, 7);
-                        word.Status = Status.willRecall;
-
-                        lstAllWords.Add(word);
-                        if (word.startTime <= DateTime.Now)
-                        {
-                            lstTuChuaCoLichOn.Add(word);
-                        }
-                        row++;
-                    } while (excel.ReadCell(row, 1) != "");
-                }
+                
+                var dsTuThread = new Thread(() => dsTatCaCacTu = FileEvent.DocDanhSachTatCaTuVung(this.Text, lbProcessing));
+                dsTuThread.Start();
             }
-            catch (Exception ex) { }
-            finally
+            catch
             {
-                excel.Close();
+                MessageBox.Show("Lỗi đọc file");
             }
-
-
         }
-
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnNext_Click(object sender, EventArgs e)
         {
 
             btnPre.Enabled = true;
             currentIndexWord++;
-            currentWord = lstCurrentWords[currentIndexWord];
+            tuHienTai = dsTuHienTai[currentIndexWord];
             HienThe(currentIndexWord);
-            ButtonShowOrNot();
+            BatTatNutChuyenThe();
         }
 
         private void btnForget_Click(object sender, EventArgs e)
         {
-            currentWord.Status = Status.forget;
+            tuHienTai.Status = Status.forget;
             pnBack.BackColor = Color.FromArgb(211, 59, 2);
             pnFront.BackColor = Color.FromArgb(211, 59, 2);
-
         }
 
         private void btnRemembed_Click(object sender, EventArgs e)
         {
-            currentWord.Status = Status.remember;
+            tuHienTai.Status = Status.remember;
             pnBack.BackColor = Color.Green;
             pnFront.BackColor = Color.Green;
         }
@@ -219,9 +177,9 @@ namespace FlashCard.View
         private void btnPre_Click(object sender, EventArgs e)
         {
             currentIndexWord--;
-            currentWord = lstCurrentWords[currentIndexWord];
+            tuHienTai = dsTuHienTai[currentIndexWord];
             HienThe(currentIndexWord);
-            ButtonShowOrNot();
+            BatTatNutChuyenThe();
         }
 
         private void btnFlip_Click(object sender, EventArgs e)
@@ -239,57 +197,32 @@ namespace FlashCard.View
                 side = 1;
             }
         }
-
-        private void lbPathOfSpeech_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbExample_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbMean_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbTagName_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void numIndexWord_ValueChanged(object sender, EventArgs e)
         {
             try
             {
                 currentIndexWord = Convert.ToInt32(numIndexWord.Value);
-                currentWord = lstCurrentWords[currentIndexWord];
+                tuHienTai = dsTuHienTai[currentIndexWord];
                 HienThe(currentIndexWord);
             }
             catch
             {
-
             }
-
-
         }
 
         private void btnTuDaThuoc_Click(object sender, EventArgs e)
         {
 
-            if (filterList == FilterEnum.AllList)
+            if (loaiDsChiaTu == ChiaDanhSach.AllList)
             {
-                lstCurrentWords = lstAllWords;
+                dsTuHienTai = dsTatCaCacTu;
             }
-            else if (filterList == FilterEnum.ByDay)
+            else if (loaiDsChiaTu == ChiaDanhSach.ByDay)
             {
-                lstCurrentWords = lstAllWordsByDay;
-
+                dsTuHienTai = lstAllWordsByDay;
             }
             lstWordsRemembed.Clear();
-            foreach (Word rememberWord in lstCurrentWords)
+            foreach (Word rememberWord in dsTuHienTai)
             {
                 if (rememberWord.Status == Status.remember)
                 {
@@ -301,62 +234,65 @@ namespace FlashCard.View
                 MessageBox.Show("List Tu nay trong");
                 return;
             }
-            lstCurrentWords = lstWordsRemembed;
-            currentWord = lstWordsRemembed[0];
+            dsTuHienTai = lstWordsRemembed;
+            tuHienTai = lstWordsRemembed[0];
             currentIndexWord = 0;
-            numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+            numIndexWord.Maximum = dsTuHienTai.Count() - 1;
             HienThe(currentIndexWord);
-            ButtonShowOrNot();
+            BatTatNutChuyenThe();
 
         }
 
         private void btnTuChuaThuoc_Click(object sender, EventArgs e)
         {
-            if (filterList == FilterEnum.AllList)
+            if (loaiDsChiaTu == ChiaDanhSach.AllList)
             {
-                lstCurrentWords = lstAllWords;
+                dsTuHienTai = dsTatCaCacTu;
             }
-            else if (filterList == FilterEnum.ByDay)
+            else if (loaiDsChiaTu == ChiaDanhSach.ByDay)
             {
-                lstCurrentWords = lstAllWordsByDay;
+                dsTuHienTai = lstAllWordsByDay;
             }
-            lstWordsRepeat.Clear();
-            foreach (Word forgetWord in lstCurrentWords)
+
+            dsTuOnLai.Clear();
+
+            foreach (Word forgetWord in dsTuHienTai)
             {
                 if (forgetWord.Status == Status.forget)
                 {
-                    lstWordsRepeat.Add(forgetWord);
+                    dsTuOnLai.Add(forgetWord);
                 }
             }
-            if (lstWordsRepeat.Count == 0)
+            if (dsTuOnLai.Count == 0)
             {
                 MessageBox.Show("List Tu nay trong");
                 return;
             }
-            lstCurrentWords = lstWordsRepeat;
-            currentWord = lstWordsRepeat[0];
+            dsTuHienTai = dsTuOnLai;
+            tuHienTai = dsTuOnLai[0];
             currentIndexWord = 0;
-            numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+            numIndexWord.Maximum = dsTuHienTai.Count() - 1;
             HienThe(currentIndexWord);
-            ButtonShowOrNot();
+            BatTatNutChuyenThe();
 
         }
 
         private void btnAllTu_Click(object sender, EventArgs e)
         {
-            lstCurrentWords = lstAllWordsByDay;
-            currentWord = lstCurrentWords[0];
+            dsTuHienTai = lstAllWordsByDay;
+            tuHienTai = dsTuHienTai[0];
             currentIndexWord = 0;
             HienThe(currentIndexWord);
-            ButtonShowOrNot();
+            BatTatNutChuyenThe();
 
         }
 
         private void btnAllTu_Click_1(object sender, EventArgs e)
         {
-            if (lstCurrentWords.Count > 0)
+            dsTuHienTai = dsTatCaCacTu;
+            if (dsTuHienTai.Count > 0)
             {
-                filterList = FilterEnum.AllList;
+                loaiDsChiaTu = ChiaDanhSach.AllList;
                 pnFlashCard.Visible = true;
 
                 btnListTuDaThuoc.Enabled = true;
@@ -367,23 +303,18 @@ namespace FlashCard.View
                 btnRemembed.Enabled = true;
 
 
-                lstCurrentWords = lstAllWords;
-                currentWord = lstCurrentWords[0];
+                dsTuHienTai = dsTatCaCacTu;
+                tuHienTai = dsTuHienTai[0];
                 currentIndexWord = 0;
-                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+                numIndexWord.Maximum = dsTuHienTai.Count() - 1;
                 HienThe(currentIndexWord);
-                ButtonShowOrNot();
+                BatTatNutChuyenThe();
             }
             else
             {
                 MessageBox.Show("Danh sách trống");
 
             }
-
-        }
-
-        private void btnHien2Mat_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -423,7 +354,7 @@ namespace FlashCard.View
         {
             lstAllWordsByDay.Clear();
             pnFlashCard.Visible = true;
-            filterList = FilterEnum.ByDay;
+            loaiDsChiaTu = ChiaDanhSach.ByDay;
 
             btnListTuDaThuoc.Enabled = true;
             btnTuChuaThuoc.Enabled = true;
@@ -432,17 +363,9 @@ namespace FlashCard.View
             btnForget.Enabled = true;
             btnRemembed.Enabled = true;
 
-            foreach (Word w in lstAllWords)
-            {
-                w.Status = Status.willRecall;
 
-                DateTime dateTimePicked = dtpkDsTuOn.SelectionStart.Date;
-                if (dateTimePicked == w.startTime)
-                {
-                    lstAllWordsByDay.Add(w);
-                }
-            }
-
+            DateTime ngayOnDuocChon = dtpkDsTuOn.SelectionStart.Date;
+            lstAllWordsByDay = FileEvent.DocDanhSachTuOnTheoNgay(dsTatCaCacTu, ngayOnDuocChon);
 
             if (lstAllWordsByDay.Count() == 0)
             {
@@ -456,24 +379,25 @@ namespace FlashCard.View
 
             try
             {
-                lstCurrentWords = lstAllWordsByDay;
+                dsTuHienTai = lstAllWordsByDay;
                 HienThe(0);
             }
             catch { }
             finally
             {
-                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+                numIndexWord.Maximum = dsTuHienTai.Count() - 1;
                 numIndexWord.Minimum = 0;
             }
 
-            ButtonShowOrNot();
+            BatTatNutChuyenThe();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            lstTuChuaCoLichOn = FileEvent.DocDanhSachTuChuaCoLichOn(dsTatCaCacTu);
             if (lstTuChuaCoLichOn.Count() > 0)
             {
-                filterList = FilterEnum.LichOnTrongQuaKhu;
+                loaiDsChiaTu = ChiaDanhSach.LichOnTrongQuaKhu;
                 pnFlashCard.Visible = true;
 
                 btnListTuDaThuoc.Enabled = true;
@@ -484,12 +408,12 @@ namespace FlashCard.View
                 btnRemembed.Enabled = true;
 
 
-                lstCurrentWords = lstTuChuaCoLichOn;
-                currentWord = lstCurrentWords[0];
+                dsTuHienTai = lstTuChuaCoLichOn;
+                tuHienTai = dsTuHienTai[0];
                 currentIndexWord = 0;
-                numIndexWord.Maximum = lstCurrentWords.Count() - 1;
+                numIndexWord.Maximum = dsTuHienTai.Count() - 1;
                 HienThe(currentIndexWord);
-                ButtonShowOrNot();
+                BatTatNutChuyenThe();
             }
             else
             {
@@ -511,20 +435,25 @@ namespace FlashCard.View
 
         private void dtpkSetTgOn_DateChanged(object sender, DateRangeEventArgs e)
         {
-            currentWord.startTime = dtpkSetTgOn.SelectionRange.Start;
+            tuHienTai.startTime = dtpkSetTgOn.SelectionRange.Start;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                FileEvent.LuuFileTuVung(this.Text, lstAllWords);
+                FileEvent.LuuFileTuVung(this.Text, dsTatCaCacTu);
                 MessageBox.Show("Lưu thành công!!");
             }
             catch
             {
                 MessageBox.Show("Lỗi khi lưu");
             }
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
 
         }
     }

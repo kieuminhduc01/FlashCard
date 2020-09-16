@@ -1,10 +1,14 @@
 ﻿using FlashCard.Model;
+using FlashCard.Model.Enum;
+using FlashCard.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FlashCard.Controller
 {
@@ -97,6 +101,79 @@ namespace FlashCard.Controller
                 excel.Close();
             }
         }
-        public static 
+
+        public static List<Word> DocDanhSachTatCaTuVung(string tenFile,Label lbProcessing)
+        {
+            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", tenFile + ".xlsx");
+            List<Word> lstAllWords = new List<Word>();
+
+            Excel excel = new Excel(filePath, 1);
+            try
+            {
+                if (excel.ReadCell(2, 1) != "")
+                {
+                    int row = 2;
+                    do
+                    {
+
+                        Word word = new Word();
+                        word.tagName = excel.ReadCell(row, 1);
+                        word.mean = excel.ReadCell(row, 2);
+                        word.startTime = DateTime.FromOADate(double.Parse(excel.ReadCell(row, 3)));
+                        word.ATTT = excel.ReadCell(row, 4);
+                        word.IPA = excel.ReadCell(row, 5);
+                        word.pathOfSpeech = excel.ReadCell(row, 6);
+                        word.Example = excel.ReadCell(row, 7);
+                        word.Status = Status.willRecall;
+
+                        lstAllWords.Add(word);
+                        row++;
+                    } while (excel.ReadCell(row, 1) != "");
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                excel.Close();
+             //   lbProcessing.Hide();
+            }
+            return lstAllWords;
+
+        }
+        public static List<Word> DocDanhSachTuChuaCoLichOn(List<Word> lstAllWords)
+        {
+            List<Word> dsTuChuaCoLichOn = new List<Word>();
+            foreach (Word word in lstAllWords)
+            {
+                if (word.startTime <= DateTime.Now)
+                {
+                    dsTuChuaCoLichOn.Add(word);
+                }
+            }
+            return dsTuChuaCoLichOn;
+
+        }
+        /// <summary>
+        /// Đọc danh sách các từ ôn theo ngày
+        /// </summary>
+        /// <param name="dsTatCaCacTu"> danh sách tất cả các từ vựng trong file</param>
+        /// <param name="ngayOn">ngày học từ vựng được chọn</param>
+        /// <returns>danh sách từ vựng ôn theo ngày được chọn</returns>
+        public static List<Word> DocDanhSachTuOnTheoNgay(List<Word> dsTatCaCacTu,DateTime ngayOn)
+        {
+            List<Word> dsTuOnTheoNgay = new List<Word>();
+            foreach (Word w in dsTatCaCacTu)
+            {
+                w.Status = Status.willRecall;
+                if (ngayOn == w.startTime)
+                {
+                    dsTuOnTheoNgay.Add(w);
+                }
+            }
+            return dsTuOnTheoNgay;
+        }
     }
 }

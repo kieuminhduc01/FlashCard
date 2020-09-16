@@ -137,5 +137,10 @@ namespace FlashCard.View
         {
             System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, @"..\..\Data\"));
         }
+
+        private void pLoading_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NhomTu));
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbTuTongSo = new System.Windows.Forms.Label();
@@ -48,15 +49,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnTuChuaThuoc = new System.Windows.Forms.Button();
             this.btnListTuDaThuoc = new System.Windows.Forms.Button();
-            this.btnAllTu = new System.Windows.Forms.Button();
             this.cbCaiDatHienThi = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pnFlashCard = new System.Windows.Forms.Panel();
-            this.tbnTimTheoNgay = new System.Windows.Forms.Button();
             this.dtpkSetTgOn = new System.Windows.Forms.MonthCalendar();
-            this.btnTuChuaCoLichOn = new System.Windows.Forms.Button();
             this.cbHienAmThanhTuongTu = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnTuChuaCoLichOn = new System.Windows.Forms.Button();
+            this.tbnTimTheoNgay = new System.Windows.Forms.Button();
+            this.btnAllTu = new System.Windows.Forms.Button();
+            this.trmProcessing = new System.Windows.Forms.Timer(this.components);
+            this.lbProcessing = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.pnBack.SuspendLayout();
             this.pnFront.SuspendLayout();
@@ -75,7 +78,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(557, 609);
             this.panel2.TabIndex = 1;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // lbTuTongSo
             // 
@@ -118,7 +120,6 @@
             this.lbMean.TabIndex = 2;
             this.lbMean.Text = "Mean";
             this.lbMean.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbMean.Click += new System.EventHandler(this.lbMean_Click);
             // 
             // lbPathOfSpeech
             // 
@@ -130,7 +131,6 @@
             this.lbPathOfSpeech.TabIndex = 0;
             this.lbPathOfSpeech.Text = "PathOfSpeech";
             this.lbPathOfSpeech.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbPathOfSpeech.Click += new System.EventHandler(this.lbPathOfSpeech_Click);
             // 
             // btnForget
             // 
@@ -181,19 +181,17 @@
             this.lbTagName.TabIndex = 0;
             this.lbTagName.Text = "TagName";
             this.lbTagName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbTagName.Click += new System.EventHandler(this.lbTagName_Click);
             // 
             // lbExample
             // 
             this.lbExample.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbExample.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lbExample.Location = new System.Drawing.Point(32, 52);
+            this.lbExample.Location = new System.Drawing.Point(32, 39);
             this.lbExample.Name = "lbExample";
             this.lbExample.Size = new System.Drawing.Size(482, 133);
             this.lbExample.TabIndex = 1;
             this.lbExample.Text = "Example";
             this.lbExample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbExample.Click += new System.EventHandler(this.lbExample_Click);
             // 
             // lbIPA
             // 
@@ -205,7 +203,6 @@
             this.lbIPA.TabIndex = 1;
             this.lbIPA.Text = "IPA";
             this.lbIPA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbIPA.Click += new System.EventHandler(this.label3_Click);
             // 
             // btnNext
             // 
@@ -235,11 +232,10 @@
             // 
             // dtpkDsTuOn
             // 
-            this.dtpkDsTuOn.Location = new System.Drawing.Point(19, 103);
+            this.dtpkDsTuOn.Location = new System.Drawing.Point(20, 132);
             this.dtpkDsTuOn.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.dtpkDsTuOn.Name = "dtpkDsTuOn";
             this.dtpkDsTuOn.TabIndex = 7;
-            this.dtpkDsTuOn.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // numIndexWord
             // 
@@ -286,21 +282,6 @@
             this.btnListTuDaThuoc.UseVisualStyleBackColor = false;
             this.btnListTuDaThuoc.Click += new System.EventHandler(this.btnTuDaThuoc_Click);
             // 
-            // btnAllTu
-            // 
-            this.btnAllTu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
-            this.btnAllTu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.btnAllTu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAllTu.Image = ((System.Drawing.Image)(resources.GetObject("btnAllTu.Image")));
-            this.btnAllTu.Location = new System.Drawing.Point(157, 43);
-            this.btnAllTu.Name = "btnAllTu";
-            this.btnAllTu.Size = new System.Drawing.Size(124, 41);
-            this.btnAllTu.TabIndex = 12;
-            this.btnAllTu.Text = "Tất cả";
-            this.btnAllTu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAllTu.UseVisualStyleBackColor = false;
-            this.btnAllTu.Click += new System.EventHandler(this.btnAllTu_Click_1);
-            // 
             // cbCaiDatHienThi
             // 
             this.cbCaiDatHienThi.FormattingEnabled = true;
@@ -337,43 +318,12 @@
             this.pnFlashCard.Size = new System.Drawing.Size(585, 744);
             this.pnFlashCard.TabIndex = 16;
             // 
-            // tbnTimTheoNgay
-            // 
-            this.tbnTimTheoNgay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
-            this.tbnTimTheoNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.tbnTimTheoNgay.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.tbnTimTheoNgay.Image = ((System.Drawing.Image)(resources.GetObject("tbnTimTheoNgay.Image")));
-            this.tbnTimTheoNgay.Location = new System.Drawing.Point(19, 43);
-            this.tbnTimTheoNgay.Name = "tbnTimTheoNgay";
-            this.tbnTimTheoNgay.Size = new System.Drawing.Size(124, 41);
-            this.tbnTimTheoNgay.TabIndex = 18;
-            this.tbnTimTheoNgay.Text = "Ngày";
-            this.tbnTimTheoNgay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.tbnTimTheoNgay.UseVisualStyleBackColor = false;
-            this.tbnTimTheoNgay.Click += new System.EventHandler(this.tbnTimTheoNgay_Click);
-            // 
             // dtpkSetTgOn
             // 
             this.dtpkSetTgOn.Location = new System.Drawing.Point(19, 407);
             this.dtpkSetTgOn.Name = "dtpkSetTgOn";
             this.dtpkSetTgOn.TabIndex = 19;
             this.dtpkSetTgOn.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.dtpkSetTgOn_DateChanged);
-            // 
-            // btnTuChuaCoLichOn
-            // 
-            this.btnTuChuaCoLichOn.AccessibleRole = System.Windows.Forms.AccessibleRole.IpAddress;
-            this.btnTuChuaCoLichOn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
-            this.btnTuChuaCoLichOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            this.btnTuChuaCoLichOn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTuChuaCoLichOn.Image = ((System.Drawing.Image)(resources.GetObject("btnTuChuaCoLichOn.Image")));
-            this.btnTuChuaCoLichOn.Location = new System.Drawing.Point(19, 335);
-            this.btnTuChuaCoLichOn.Name = "btnTuChuaCoLichOn";
-            this.btnTuChuaCoLichOn.Size = new System.Drawing.Size(262, 41);
-            this.btnTuChuaCoLichOn.TabIndex = 20;
-            this.btnTuChuaCoLichOn.Text = "Từ chưa có lịch ôn";
-            this.btnTuChuaCoLichOn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTuChuaCoLichOn.UseVisualStyleBackColor = false;
-            this.btnTuChuaCoLichOn.Click += new System.EventHandler(this.button1_Click);
             // 
             // cbHienAmThanhTuongTu
             // 
@@ -401,11 +351,67 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnTuChuaCoLichOn
+            // 
+            this.btnTuChuaCoLichOn.AccessibleRole = System.Windows.Forms.AccessibleRole.IpAddress;
+            this.btnTuChuaCoLichOn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
+            this.btnTuChuaCoLichOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.btnTuChuaCoLichOn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTuChuaCoLichOn.Image = ((System.Drawing.Image)(resources.GetObject("btnTuChuaCoLichOn.Image")));
+            this.btnTuChuaCoLichOn.Location = new System.Drawing.Point(20, 351);
+            this.btnTuChuaCoLichOn.Name = "btnTuChuaCoLichOn";
+            this.btnTuChuaCoLichOn.Size = new System.Drawing.Size(262, 41);
+            this.btnTuChuaCoLichOn.TabIndex = 20;
+            this.btnTuChuaCoLichOn.Text = "Từ chưa có lịch ôn";
+            this.btnTuChuaCoLichOn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTuChuaCoLichOn.UseVisualStyleBackColor = false;
+            this.btnTuChuaCoLichOn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // tbnTimTheoNgay
+            // 
+            this.tbnTimTheoNgay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
+            this.tbnTimTheoNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.tbnTimTheoNgay.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tbnTimTheoNgay.Image = ((System.Drawing.Image)(resources.GetObject("tbnTimTheoNgay.Image")));
+            this.tbnTimTheoNgay.Location = new System.Drawing.Point(20, 72);
+            this.tbnTimTheoNgay.Name = "tbnTimTheoNgay";
+            this.tbnTimTheoNgay.Size = new System.Drawing.Size(124, 41);
+            this.tbnTimTheoNgay.TabIndex = 18;
+            this.tbnTimTheoNgay.Text = "Ngày";
+            this.tbnTimTheoNgay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.tbnTimTheoNgay.UseVisualStyleBackColor = false;
+            this.tbnTimTheoNgay.Click += new System.EventHandler(this.tbnTimTheoNgay_Click);
+            // 
+            // btnAllTu
+            // 
+            this.btnAllTu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(173)))), ((int)(((byte)(116)))));
+            this.btnAllTu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            this.btnAllTu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnAllTu.Image = ((System.Drawing.Image)(resources.GetObject("btnAllTu.Image")));
+            this.btnAllTu.Location = new System.Drawing.Point(158, 72);
+            this.btnAllTu.Name = "btnAllTu";
+            this.btnAllTu.Size = new System.Drawing.Size(124, 41);
+            this.btnAllTu.TabIndex = 12;
+            this.btnAllTu.Text = "Tất cả";
+            this.btnAllTu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAllTu.UseVisualStyleBackColor = false;
+            this.btnAllTu.Click += new System.EventHandler(this.btnAllTu_Click_1);
+            // 
+            // lbProcessing
+            // 
+            this.lbProcessing.Image = ((System.Drawing.Image)(resources.GetObject("lbProcessing.Image")));
+            this.lbProcessing.Location = new System.Drawing.Point(1054, 341);
+            this.lbProcessing.Name = "lbProcessing";
+            this.lbProcessing.Size = new System.Drawing.Size(144, 132);
+            this.lbProcessing.TabIndex = 22;
+            this.lbProcessing.Click += new System.EventHandler(this.label2_Click);
+            // 
             // NhomTu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 783);
+            this.ClientSize = new System.Drawing.Size(1276, 787);
+            this.Controls.Add(this.lbProcessing);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cbHienAmThanhTuongTu);
             this.Controls.Add(this.btnTuChuaCoLichOn);
@@ -464,5 +470,7 @@
         private System.Windows.Forms.Button btnTuChuaCoLichOn;
         private System.Windows.Forms.CheckBox cbHienAmThanhTuongTu;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Timer trmProcessing;
+        public System.Windows.Forms.Label lbProcessing;
     }
 }
