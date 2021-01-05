@@ -102,7 +102,7 @@ namespace FlashCard.Controller
             }
         }
 
-        public static List<Word> DocDanhSachTatCaTuVung(string tenFile,Label lbProcessing)
+        public static List<Word> DocDanhSachTatCaTuVung(string tenFile, Label lbProcessing)
         {
             string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", tenFile + ".xlsx");
             List<Word> lstAllWords = new List<Word>();
@@ -138,7 +138,10 @@ namespace FlashCard.Controller
             finally
             {
                 excel.Close();
-             //   lbProcessing.Hide();
+                lbProcessing.Invoke(new MethodInvoker(delegate ()
+                {
+                    lbProcessing.Hide();
+                }));
             }
             return lstAllWords;
 
@@ -162,7 +165,7 @@ namespace FlashCard.Controller
         /// <param name="dsTatCaCacTu"> danh sách tất cả các từ vựng trong file</param>
         /// <param name="ngayOn">ngày học từ vựng được chọn</param>
         /// <returns>danh sách từ vựng ôn theo ngày được chọn</returns>
-        public static List<Word> DocDanhSachTuOnTheoNgay(List<Word> dsTatCaCacTu,DateTime ngayOn)
+        public static List<Word> DocDanhSachTuOnTheoNgay(List<Word> dsTatCaCacTu, DateTime ngayOn)
         {
             List<Word> dsTuOnTheoNgay = new List<Word>();
             foreach (Word w in dsTatCaCacTu)

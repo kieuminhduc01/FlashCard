@@ -46,7 +46,7 @@ namespace FlashCard.View
         private void button1_Click(object sender, EventArgs e)
         {
             ChuDe chuDe = new ChuDe(this);
-            chuDe.Show(); 
+            chuDe.Show();
         }
 
         private void Menu_Load(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace FlashCard.View
                 btnNewGroup.Image = Image.FromFile(@"..\..\Picture\words.png");
                 #endregion
 
-                
+
                 btnNewGroup.Click += MouseClick;
                 btnNewGroup.Click += new EventHandler(this.EventForButtonGroup);
 
@@ -102,12 +102,6 @@ namespace FlashCard.View
                 }
 
             }
-           
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -137,10 +131,22 @@ namespace FlashCard.View
         {
             System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory, @"..\..\Data\"));
         }
-
-        private void pLoading_Click(object sender, EventArgs e)
+        private void btnLearn_Click(object sender, EventArgs e)
         {
-
+            DialogResult result = openFileDialogFileVocabulary.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+                string fileName = System.IO.Path.GetFileName(openFileDialogFileVocabulary.FileName);
+                if (pnMain.Controls.Count > 0)
+                {
+                    MessageBox.Show("bạn phải đóng form đang hiện trước");
+                    return;
+                }
+                NhomTu nhomTu = new NhomTu() { TopLevel = false, TopMost = true }; ;
+                nhomTu.Text = fileName;
+                this.pnMain.Controls.Add(nhomTu);
+                nhomTu.Show();
+            }
         }
     }
 }

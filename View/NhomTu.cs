@@ -141,7 +141,6 @@ namespace FlashCard.View
             #endregion
             try
             {
-                
                 var dsTuThread = new Thread(() => dsTatCaCacTu = FileEvent.DocDanhSachTatCaTuVung(this.Text, lbProcessing));
                 dsTuThread.Start();
             }

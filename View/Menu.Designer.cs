@@ -37,6 +37,8 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.pnShow = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLearn = new System.Windows.Forms.Button();
+            this.openFileDialogFileVocabulary = new System.Windows.Forms.OpenFileDialog();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -63,6 +65,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.btnLearn);
             this.panel1.Controls.Add(this.btnMoThuMucData);
             this.panel1.Controls.Add(this.btnNewGroup);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -126,7 +129,7 @@
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(275, 125);
+            this.button1.Size = new System.Drawing.Size(275, 124);
             this.button1.TabIndex = 4;
             this.button1.Text = "Flash Card Recall";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -140,6 +143,28 @@
             this.pnShow.Name = "pnShow";
             this.pnShow.Size = new System.Drawing.Size(275, 790);
             this.pnShow.TabIndex = 3;
+            // 
+            // btnLearn
+            // 
+            this.btnLearn.BackColor = System.Drawing.Color.White;
+            this.btnLearn.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLearn.FlatAppearance.BorderSize = 0;
+            this.btnLearn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLearn.Font = new System.Drawing.Font("Microsoft YaHei", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLearn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnLearn.Image = ((System.Drawing.Image)(resources.GetObject("btnLearn.Image")));
+            this.btnLearn.Location = new System.Drawing.Point(386, 0);
+            this.btnLearn.Name = "btnLearn";
+            this.btnLearn.Size = new System.Drawing.Size(193, 59);
+            this.btnLearn.TabIndex = 2;
+            this.btnLearn.Text = "Learn";
+            this.btnLearn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLearn.UseVisualStyleBackColor = false;
+            this.btnLearn.Click += new System.EventHandler(this.btnLearn_Click);
+            // 
+            // openFileDialogFileVocabulary
+            // 
+            this.openFileDialogFileVocabulary.FileName = "openFileDialog1";
             // 
             // Menu
             // 
@@ -170,5 +195,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnMoThuMucData;
+        private System.Windows.Forms.Button btnLearn;
+        private System.Windows.Forms.OpenFileDialog openFileDialogFileVocabulary;
     }
 }
