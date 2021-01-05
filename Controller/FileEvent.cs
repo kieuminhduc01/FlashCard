@@ -60,12 +60,9 @@ namespace FlashCard.Controller
             }
             return true;
         }
-        public static void LuuFileTuVung(string tenFile, List<Word> lstAllWords)
+        public static void LuuFileTuVung(string filePath, List<Word> lstAllWords)
         {
-            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", tenFile + ".xlsx");
-
             Excel excel = new Excel(filePath, 1);
-
 
             try
             {
@@ -102,9 +99,8 @@ namespace FlashCard.Controller
             }
         }
 
-        public static List<Word> DocDanhSachTatCaTuVung(string tenFile, Label lbProcessing)
+        public static List<Word> DocDanhSachTatCaTuVung(string filePath)
         {
-            string filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\Data\", tenFile + ".xlsx");
             List<Word> lstAllWords = new List<Word>();
 
             Excel excel = new Excel(filePath, 1);
@@ -134,14 +130,6 @@ namespace FlashCard.Controller
             catch
             {
                 throw;
-            }
-            finally
-            {
-                excel.Close();
-                lbProcessing.Invoke(new MethodInvoker(delegate ()
-                {
-                    lbProcessing.Hide();
-                }));
             }
             return lstAllWords;
 

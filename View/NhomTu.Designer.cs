@@ -59,7 +59,6 @@
             this.tbnTimTheoNgay = new System.Windows.Forms.Button();
             this.btnAllTu = new System.Windows.Forms.Button();
             this.trmProcessing = new System.Windows.Forms.Timer(this.components);
-            this.lbProcessing = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.pnBack.SuspendLayout();
             this.pnFront.SuspendLayout();
@@ -397,21 +396,11 @@
             this.btnAllTu.UseVisualStyleBackColor = false;
             this.btnAllTu.Click += new System.EventHandler(this.btnAllTu_Click_1);
             // 
-            // lbProcessing
-            // 
-            this.lbProcessing.Image = ((System.Drawing.Image)(resources.GetObject("lbProcessing.Image")));
-            this.lbProcessing.Location = new System.Drawing.Point(1054, 341);
-            this.lbProcessing.Name = "lbProcessing";
-            this.lbProcessing.Size = new System.Drawing.Size(144, 132);
-            this.lbProcessing.TabIndex = 22;
-            this.lbProcessing.Click += new System.EventHandler(this.label2_Click);
-            // 
             // NhomTu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1276, 787);
-            this.Controls.Add(this.lbProcessing);
+            this.ClientSize = new System.Drawing.Size(1121, 787);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cbHienAmThanhTuongTu);
             this.Controls.Add(this.btnTuChuaCoLichOn);
@@ -471,6 +460,5 @@
         private System.Windows.Forms.CheckBox cbHienAmThanhTuongTu;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Timer trmProcessing;
-        public System.Windows.Forms.Label lbProcessing;
     }
 }

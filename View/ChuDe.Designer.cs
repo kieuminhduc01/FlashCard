@@ -69,7 +69,6 @@
             this.Controls.Add(this.label1);
             this.Name = "ChuDe";
             this.Text = "New Group";
-            this.Load += new System.EventHandler(this.ChuDe_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

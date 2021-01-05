@@ -57,7 +57,6 @@ namespace FlashCard.View
 
                 #endregion
                 btnNewGroup.Enabled = false;
-                menu.pnShow.Controls.Add(btnNewGroup);
             }
             catch (IOException ex)
             {
@@ -65,11 +64,8 @@ namespace FlashCard.View
             }
 
 
-}
+        }
 
-private void ChuDe_Load(object sender, EventArgs e)
-{
-
-}
+       
     }
 }

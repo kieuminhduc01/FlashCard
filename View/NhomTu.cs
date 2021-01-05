@@ -125,30 +125,7 @@ namespace FlashCard.View
                 btnNext.Enabled = true;
             }
         }
-        private void NhomTu_Load(object sender, EventArgs e)
-        {
-            #region set thanh phan hien thi
-            this.WindowState = FormWindowState.Maximized;
-            btnListTuDaThuoc.Enabled = false;
-            btnTuChuaThuoc.Enabled = false;
-            btnPre.Enabled = false;
-            btnNext.Enabled = false;
-            btnForget.Enabled = false;
-            btnRemembed.Enabled = false;
-            pnFlashCard.Visible = false;
-            lbProcessing.Location = new System.Drawing.Point(600, 200);
-            lbProcessing.Show();
-            #endregion
-            try
-            {
-                var dsTuThread = new Thread(() => dsTatCaCacTu = FileEvent.DocDanhSachTatCaTuVung(this.Text, lbProcessing));
-                dsTuThread.Start();
-            }
-            catch
-            {
-                MessageBox.Show("Lỗi đọc file");
-            }
-        }
+
         private void btnNext_Click(object sender, EventArgs e)
         {
 
@@ -342,6 +319,16 @@ namespace FlashCard.View
             DialogResult result = MessageBox.Show("Trước khi đóng form bạn nhớ phải lưu thay đổi trước đã?", "chú ý!!!", MessageBoxButtons.OKCancel);
             if (result == DialogResult.OK)
             {
+                try
+                {
+                    FileEvent.LuuFileTuVung(this.Text, dsTatCaCacTu);
+                    MessageBox.Show("Lưu thành công!!");
+                }
+                catch(Exception ed)
+                {
+                    MessageBox.Show("Lỗi khi lưu");
+                    e.Cancel = true;
+                }
             }
             else if (result == DialogResult.Cancel)
             {
@@ -450,10 +437,17 @@ namespace FlashCard.View
             }
 
         }
-
-        private void label2_Click(object sender, EventArgs e)
+        private void NhomTu_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                var dsTuThread = new Thread(() => dsTatCaCacTu = FileEvent.DocDanhSachTatCaTuVung(this.Text));
+                dsTuThread.Start();
+            }
+            catch
+            {
+                MessageBox.Show("Lỗi đọc file");
+            }
         }
     }
 }

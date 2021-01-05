@@ -72,35 +72,7 @@ namespace FlashCard.View
                 btnNewGroup.TextImageRelation = TextImageRelation.ImageBeforeText;
                 btnNewGroup.Image = Image.FromFile(@"..\..\Picture\words.png");
                 #endregion
-
-
-                btnNewGroup.Click += MouseClick;
                 btnNewGroup.Click += new EventHandler(this.EventForButtonGroup);
-
-
-                if (File.ReadAllLines(s).Length == 1)
-                {
-                    btnNewGroup.BackColor = Color.FromArgb(22, 131, 94);
-                    btnNewGroup.Enabled = false;
-                }
-                this.pnShow.Controls.Add(btnNewGroup);
-            }
-        }
-
-        private void MouseClick(object sender, EventArgs e)
-        {
-            foreach (Button btn in pnShow.Controls)
-            {
-                if (btn.BackColor == Color.FromArgb(22, 131, 94))
-                {
-                    btn.Enabled = false;
-                    continue;
-                }
-                else
-                {
-                    btn.BackColor = Color.FromArgb(0, 173, 116);
-                }
-
             }
         }
 
@@ -136,7 +108,7 @@ namespace FlashCard.View
             DialogResult result = openFileDialogFileVocabulary.ShowDialog();
             if (result == DialogResult.OK) // Test result.
             {
-                string fileName = System.IO.Path.GetFileName(openFileDialogFileVocabulary.FileName);
+                string fileName = openFileDialogFileVocabulary.FileName;
                 if (pnMain.Controls.Count > 0)
                 {
                     MessageBox.Show("bạn phải đóng form đang hiện trước");
