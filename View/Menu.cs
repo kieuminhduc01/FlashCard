@@ -120,5 +120,7 @@ namespace FlashCard.View
                 nhomTu.Show();
             }
         }
+
+      
     }
 }

@@ -22,9 +22,6 @@ namespace FlashCard.View
             InitializeComponent();
             this.menu = menu;
         }
-
-
-
         private void btnSave_Click(object sender, EventArgs e)
         {
 
@@ -38,7 +35,6 @@ namespace FlashCard.View
                 {
                     MessageBox.Show("Tên file đã tồn tại");
                 }
-
 
                 System.Windows.Forms.Button btnNewGroup = new System.Windows.Forms.Button();
                 btnNewGroup.Size = new Size(280, 60);

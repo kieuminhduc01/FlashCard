@@ -73,19 +73,11 @@ namespace FlashCard.Controller
                 excel.WriteToCell(1, 5, "IPA");
                 excel.WriteToCell(1, 6, "pathOfSpeech");
                 excel.WriteToCell(1, 7, "Example");
-                int i = 2;
+                int row = 2;
                 foreach (Word item in lstAllWords)
                 {
-
-                    excel.WriteToCell(i, 1, item.tagName);
-                    excel.WriteToCell(i, 2, item.mean);
-                    excel.WriteToCell(i, 3, item.startTime.ToString());
-                    excel.WriteToCell(i, 4, item.ATTT);
-                    excel.WriteToCell(i, 5, item.IPA);
-                    excel.WriteToCell(i, 6, item.pathOfSpeech);
-                    excel.WriteToCell(i, 7, item.Example);
-
-                    i++;
+                    excel.WriteToCell(row, 3, item.startTime.ToString());
+                    row++;
                 }
                 excel.Save();
             }
@@ -124,12 +116,16 @@ namespace FlashCard.Controller
 
                         lstAllWords.Add(word);
                         row++;
-                    } while (excel.ReadCell(row, 1) != "");
+                    } while (excel.ReadCell(row, 1).Trim() != "");
                 }
             }
             catch
             {
                 throw;
+            }
+            finally
+            {
+                excel.Close();
             }
             return lstAllWords;
 

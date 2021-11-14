@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31825.309
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashCard", "FlashCard.csproj", "{15315559-B23C-44FB-9090-0E5025447A14}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "flashcardsetup", "..\flashcardsetup\flashcardsetup.vdproj", "{544AD357-061F-4A94-83E9-D1946BF6EEC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +15,6 @@ Global
 		{15315559-B23C-44FB-9090-0E5025447A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15315559-B23C-44FB-9090-0E5025447A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15315559-B23C-44FB-9090-0E5025447A14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{544AD357-061F-4A94-83E9-D1946BF6EEC0}.Debug|Any CPU.ActiveCfg = Debug
-		{544AD357-061F-4A94-83E9-D1946BF6EEC0}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
